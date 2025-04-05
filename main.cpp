@@ -1,16 +1,32 @@
 ///This game is reccommended to be played in 1280x800 resolution.
+#include "Animation.h"
+
 #include <SFML/Graphics.hpp>
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 800), "WayToTheGlory", sf::Style::Default);
+
     sf::RectangleShape player(sf::Vector2f(100.f, 65.f));
-    player.setFillColor(sf::Color::Green);
+
+    sf::Texture playerTexture;
+    playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
+    player.setTexture(&playerTexture);
+
+    ///Animation playerAnimation(&playerTexture, textureSize, 0.1f);
+    Animation playerAnimation(&playerTexture, sf::Vector2u(7,6), 0.1f);
+
+    float deltaTime = 0.f;
+    sf::Clock clock;
+
+    // player.setFillColor(sf::Color::Green);
     player.setPosition(640.f, 400.f);
     player.setOrigin(player.getSize().x / 2, player.getSize().y / 2);
 
     while (window.isOpen())
     {
+        deltaTime = clock.restart().asSeconds();
+
         sf::Event evnt;
         while (window.pollEvent(evnt))
         {
@@ -39,6 +55,9 @@ int main()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             window.close();
+
+        playerAnimation.Update(0, deltaTime);
+        player.setTextureRect(playerAnimation.getUVRect());
 
         window.clear(sf::Color::Black);
         window.draw(player);

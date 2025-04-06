@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 
 class Animation
@@ -18,5 +20,5 @@ class Animation
 
         void setUVRect(const sf::IntRect&);
 
-        void Update(int, float);
+        void Update(int, float, bool);
 };

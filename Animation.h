@@ -10,10 +10,11 @@ class Animation
         float totalTime;
         float switchTime;
 
-        sf::IntRect uvRect; ///public???
+        sf::IntRect uvRect;
 
     public:
         Animation(sf::Texture*, sf::Vector2u, float);
+        Animation(const Animation&);
         ~Animation();
 
         sf::IntRect getUVRect() const;

@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${workspaceFolder}/Animation.cpp",
+                "${workspaceFolder}/Entity.cpp",
                 "${workspaceFolder}/Player.cpp",
                 "${file}",
                 "-I\"C:/Libraries/SFML-2.6.2-ucrt/include\"",

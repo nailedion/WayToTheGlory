@@ -14,6 +14,15 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
     uvRect.height = texture->getSize().y / float(imageCount.y);
 }
 
+Animation::Animation(const Animation& animation) :
+    imageCount(animation.imageCount),
+    currentImage(animation.currentImage),
+    totalTime(animation.totalTime),
+    switchTime(animation.switchTime),
+    uvRect(animation.uvRect)
+{
+}
+
 sf::IntRect Animation::getUVRect() const {
     return uvRect;
 }

@@ -1,17 +1,13 @@
 #include "Animation.h"
+#include "Entity.h"
 
 #include <SFML/Graphics.hpp>
 
-class Player
+class Player: public Entity
 {
-        sf::RectangleShape body;
-        Animation animation;
-        unsigned int row;
-        float speed;
-        bool faceRight;
 
     public:
-        Player(sf::Texture*, sf::Vector2u, float, float);
+        Player(Entity&);
         ~Player();
 
         void Update(float deltaTime);

@@ -1,19 +1,11 @@
 #include "Player.h"
 #include "Animation.h"
+#include "Entity.h"
 
 #include <SFML/Graphics.hpp>
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed):
-    animation(texture, imageCount, switchTime)
+Player::Player(Entity& entity) : Entity(entity)
 {
-    this->speed = speed;
-    row = 0;
-    faceRight = true;
-
-    body.setSize(sf::Vector2f(100.f, 65.f));
-    body.setPosition(640.f, 400.f);
-    body.setTexture(texture);
-    body.setOrigin(body.getSize().x / 2, body.getSize().y / 2);
 }
 
 Player::~Player()

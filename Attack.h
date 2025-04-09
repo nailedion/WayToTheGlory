@@ -18,6 +18,7 @@ class Attack
         ~Attack();
 
         bool getIsAttacking() const { return this->isAttacking; }
+        float getAttackSpeed() const { return this->attackSpeed; }
 
         bool Update(float deltaTime);
         void Draw(sf::RenderWindow& window);

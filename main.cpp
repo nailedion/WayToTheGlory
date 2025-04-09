@@ -12,7 +12,7 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
     Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f);
-    Attack playerAttack(player, 2, 100.f);
+    Attack playerAttack(player, 2, 200.f);
 
     float deltaTime = 0.f;
     sf::Clock clock;

@@ -20,8 +20,10 @@ Player::~Player()
 
 void Player::Update(float deltaTime, Attack& playerAttack)
 {
-    if(playerAttack.getIsAttacking())
+    if(playerAttack.getIsAttacking()){
+        animation.Update(row, deltaTime * playerAttack.getAttackSpeed()/speed, faceRight);
         return;
+    }
 
     sf::Vector2f movement(0.f, 0.f);
 

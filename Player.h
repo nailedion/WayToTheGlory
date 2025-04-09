@@ -14,4 +14,5 @@ class Player: public Entity
 
         void Update(float deltaTime, Attack&);
         void Draw(sf::RenderWindow&);
+        bool isMoving() const;
 };

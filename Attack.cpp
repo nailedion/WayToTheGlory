@@ -19,7 +19,7 @@ bool Attack::Update(float deltaTime)
     {
         this->isAttacking = true;
         entity->setRow(ROW);
-        attackBody.setFillColor(sf::Color::Red);
+        // attackBody.setFillColor(sf::Color::Red);
         if(entity->getFaceRight())
             attackBody.setPosition(entity->getBody().getPosition().x , entity->getBody().getPosition().y - 15.f);
         else

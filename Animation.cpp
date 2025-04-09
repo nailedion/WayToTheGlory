@@ -31,7 +31,7 @@ void Animation::setUVRect(const sf::IntRect& rect) {
     uvRect = rect;
 }
 
-void Animation::Update(int row, float deltaTime, bool faceRight) ///, bool faceRight, bool isMoving
+void Animation::Update(int row, float deltaTime, bool faceRight)
 {
     currentImage.y =row;
     totalTime += deltaTime;
@@ -48,12 +48,12 @@ void Animation::Update(int row, float deltaTime, bool faceRight) ///, bool faceR
     if(faceRight)
     {
         uvRect.left = currentImage.x * uvRect.width;
-        uvRect.width = abs(uvRect.width); // Ensure the texture is not flipped
+        uvRect.width = abs(uvRect.width);
     }
     else
     {
         uvRect.left = (currentImage.x + 1) * abs(uvRect.width);
-        uvRect.width = -abs(uvRect.width); // Flip the texture horizontally
+        uvRect.width = -abs(uvRect.width);
     }
 }
 

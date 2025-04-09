@@ -1,6 +1,7 @@
 ///This game is reccommended to be played in 1280x800 resolution.
 #include "Player.h"
 #include "Entity.h"
+#include "Attack.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -10,8 +11,8 @@ int main()
 
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
-    Entity entity(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f);
-    Player player(entity);
+    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f);
+    Attack playerAttack(player, 2, 100.f);
 
     float deltaTime = 0.f;
     sf::Clock clock;
@@ -39,10 +40,12 @@ int main()
             }
         }
 
-        player.Update(deltaTime);
+        playerAttack.Update(deltaTime);
+        player.Update(deltaTime, playerAttack);
 
         window.clear(sf::Color::Black);
         player.Draw(window);
+        // playerAttack.Draw(window);
         window.display();
     }
     

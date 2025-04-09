@@ -16,6 +16,14 @@ Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
     body.setOrigin(body.getSize().x / 2, body.getSize().y / 2);
 }
 
+bool Entity::getFaceRight() const { return this->faceRight; }
+
+const sf::RectangleShape& Entity::getBody() const { return this->body; }
+
+const Animation& Entity::getAnimation() const { return this->animation; }
+
+void Entity::setRow(const unsigned int ROW) { row = ROW; }
+
 Entity::Entity(const Entity& entity) :
     animation(entity.animation)
 {

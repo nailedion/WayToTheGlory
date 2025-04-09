@@ -17,4 +17,22 @@ class Entity
         Entity(sf::Texture*, sf::Vector2u, float, float);
         Entity(const Entity&);
         ~Entity();
+
+        bool getFaceRight() const;
+        const sf::RectangleShape& getBody() const;
+        const Animation& getAnimation() const;
+
+        void setRow(const unsigned int ROW);
+
+        Entity& operator=(const Entity& entity)
+        {
+            if (this != &entity) {
+                this->body = entity.body;
+                this->animation = entity.animation;
+                this->row = entity.row;
+                this->speed = entity.speed;
+                this->faceRight = entity.faceRight;
+            }
+            return *this;
+        }
 };

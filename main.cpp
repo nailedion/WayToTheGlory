@@ -8,11 +8,27 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 800), "WayToTheGlory", sf::Style::Default);
+    
+    sf::Texture backgroundTexture;
+    if (!backgroundTexture.loadFromFile("Textures/Background.jpg")) {
+        return -1; // eroare la încărcare
+    }
+
+    // Creează un sprite cu textura de background
+    sf::Sprite backgroundSprite(backgroundTexture);
+
+    // (Optional) Scalează imaginea să acopere toată fereastra
+    sf::Vector2u textureSize = backgroundTexture.getSize(); // dimensiuni imagine
+    sf::Vector2u windowSize = window.getSize();             // dimensiuni fereastră
+    backgroundSprite.setScale(
+        float(windowSize.x) / textureSize.x,
+        float(windowSize.y) / textureSize.y
+    );
 
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
     Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f);
-    Attack playerAttack(player, 2, 200.f);
+    Attack playerAttack(player, 2, 150.f);
 
     float deltaTime = 0.f;
     sf::Clock clock;
@@ -43,7 +59,8 @@ int main()
         playerAttack.Update(deltaTime);
         player.Update(deltaTime, playerAttack);
 
-        window.clear(sf::Color::Black);
+        // window.clear(sf::Color::Black);
+        window.draw(backgroundSprite);
         player.Draw(window);
         // playerAttack.Draw(window);
         window.display();

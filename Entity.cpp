@@ -3,15 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 
-Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed):
+Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height) :
     animation(texture, imageCount, switchTime)
 {
     this->speed = speed;
     row = 0;
     faceRight = true;
 
-    body.setSize(sf::Vector2f(100.f, 65.f));
-    body.setPosition(640.f, 400.f);
+    body.setSize(sf::Vector2f(width, height));
+    body.setPosition(xPosition, yPosition);
     body.setTexture(texture);
     body.setOrigin(body.getSize().x / 2, body.getSize().y / 2);
 }
@@ -35,4 +35,16 @@ Entity::Entity(const Entity& entity) :
 
 Entity::~Entity()
 {
+}
+
+Entity& Entity::operator=(const Entity& entity)
+{
+    if (this != &entity) {
+        this->body = entity.body;
+        this->animation = entity.animation;
+        this->row = entity.row;
+        this->speed = entity.speed;
+        this->faceRight = entity.faceRight;
+    }
+    return *this;
 }

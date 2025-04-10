@@ -14,7 +14,7 @@ class Entity
         bool faceRight;
 
     public:
-        Entity(sf::Texture*, sf::Vector2u, float, float);
+        Entity(sf::Texture*, sf::Vector2u, float, float, float, float, float, float);
         Entity(const Entity&);
         ~Entity();
 
@@ -24,15 +24,5 @@ class Entity
 
         void setRow(const unsigned int ROW);
 
-        Entity& operator=(const Entity& entity)
-        {
-            if (this != &entity) {
-                this->body = entity.body;
-                this->animation = entity.animation;
-                this->row = entity.row;
-                this->speed = entity.speed;
-                this->faceRight = entity.faceRight;
-            }
-            return *this;
-        }
+        Entity& operator=(const Entity&);
 };

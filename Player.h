@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Animation.h"
 #include "Entity.h"
 #include "Attack.h"
@@ -8,7 +10,7 @@ class Player: public Entity
 {
 
     public:
-        Player(sf::Texture*, sf::Vector2u, float, float);
+        Player(sf::Texture*, sf::Vector2u, float, float, float, float, float, float);
         Player(Entity&);
         ~Player();
 

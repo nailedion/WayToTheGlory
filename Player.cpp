@@ -5,8 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed) :
-    Entity(texture, imageCount, switchTime, speed)
+Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height) :
+    Entity(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height)
 {
 }
 

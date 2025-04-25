@@ -14,7 +14,7 @@ class Attack
         bool isAttacking;
 
     public:
-        Attack(Entity&, const unsigned int, float speed);
+        Attack(Entity&, const unsigned int, float);
         ~Attack();
 
         bool getIsAttacking() const { return this->isAttacking; }

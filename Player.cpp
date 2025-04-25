@@ -5,8 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height) :
-    Entity(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height)
+Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth) :
+    Entity(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height, health, maxHealth)
 {
 }
 
@@ -16,6 +16,11 @@ Player::Player(Entity& entity) : Entity(entity)
 
 Player::~Player()
 {
+}
+
+sf::Vector2f Player::getPosition() const
+{
+    return body.getPosition();
 }
 
 void Player::Update(float deltaTime, Attack& playerAttack)

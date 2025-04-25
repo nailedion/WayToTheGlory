@@ -6,7 +6,7 @@
 Attack::Attack(Entity& entity, unsigned int ROW, float speed):
     entity(&entity), ROW(ROW), attackSpeed(speed), isAttacking(false)
 {
-    attackBody.setSize(sf::Vector2f(50.f, 50.f));
+    attackBody.setSize(sf::Vector2f(50.f, 25.f));
 }
 
 Attack::~Attack()
@@ -19,7 +19,9 @@ bool Attack::Update(float deltaTime)
     {
         this->isAttacking = true;
         entity->setRow(ROW);
-        // attackBody.setFillColor(sf::Color::Red);
+
+        attackBody.setFillColor(sf::Color::Red);
+        
         if(entity->getFaceRight())
             attackBody.setPosition(entity->getBody().getPosition().x , entity->getBody().getPosition().y - 15.f);
         else

@@ -23,7 +23,7 @@ Animation::Animation(const Animation& animation) :
 {
 }
 
-sf::IntRect Animation::getUVRect() const {
+const sf::IntRect Animation::getUVRect() const {
     return uvRect;
 }
 

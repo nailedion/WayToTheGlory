@@ -3,8 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
-Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height) :
-    animation(texture, imageCount, switchTime)
+Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth) :
+    animation(texture, imageCount, switchTime), health(health), maxHealth(maxHealth)
 {
     this->speed = speed;
     row = 0;

@@ -17,7 +17,7 @@ class Animation
         Animation(const Animation&);
         ~Animation();
 
-        sf::IntRect getUVRect() const;
+        const sf::IntRect getUVRect() const;
 
         void setUVRect(const sf::IntRect&);
 

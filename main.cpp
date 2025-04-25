@@ -1,9 +1,12 @@
 ///This game is reccommended to be played in 1280x800 resolution.
+///Try to beat the dragon by attacking it with your spear and dodging its fireball attacks.
+///You have approximately 3seconds to attack until the dragon attacks you with its fireball since you can attack him.
 #include "Player.h"
 #include "Entity.h"
 #include "Attack.h"
 #include "Monster.h"
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 int main()
@@ -26,15 +29,38 @@ int main()
 
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
-    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f);
+    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100.f, 100.f);
     Attack playerAttack(player, 2, 150.f);
 
     sf::Texture dragonTexture;
     dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png");
-    Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f);
+    Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 100.f, 100.f, false);
+    MonsterAttack dragonAttack(dragon, 2, 150.f, 50.f, 50.f, 1.6f,0.f, 100.f, 70.f, 0.f);
 
     float deltaTime = 0.f;
     sf::Clock clock;
+
+    sf::RectangleShape healthBar;
+    healthBar.setSize(sf::Vector2f(200.f, 20.f));
+    healthBar.setFillColor(sf::Color::Red);
+    healthBar.setPosition(10.f, 10.f);
+    sf::RectangleShape healthBarOutline;
+    healthBarOutline.setSize(sf::Vector2f(200.f, 20.f));
+    healthBarOutline.setFillColor(sf::Color::Transparent);
+    healthBarOutline.setOutlineThickness(2.f);
+    healthBarOutline.setOutlineColor(sf::Color::Black);
+    healthBarOutline.setPosition(10.f, 10.f);
+
+    sf::RectangleShape healthBarDragon;
+    healthBarDragon.setSize(sf::Vector2f(200.f, 20.f));
+    healthBarDragon.setFillColor(sf::Color::Red);
+    healthBarDragon.setPosition(1080.f, 10.f);
+    sf::RectangleShape healthBarOutlineDragon;
+    healthBarOutlineDragon.setSize(sf::Vector2f(200.f, 20.f));
+    healthBarOutlineDragon.setFillColor(sf::Color::Transparent);
+    healthBarOutlineDragon.setOutlineThickness(2.f);
+    healthBarOutlineDragon.setOutlineColor(sf::Color::Black);
+    healthBarOutlineDragon.setPosition(1080.f, 10.f);
 
     while (window.isOpen())
     {
@@ -61,15 +87,21 @@ int main()
 
         playerAttack.Update(deltaTime);
         player.Update(deltaTime, playerAttack);
+        
+        dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f);
 
-        dragon.Update(deltaTime, player);
-
-        // window.clear(sf::Color::Black);
         window.draw(backgroundSprite);
 
         player.Draw(window);
-        dragon.Draw(window);
+        playerAttack.Draw(window);
+        dragon.Draw(window, dragonAttack);
         
+        window.draw(healthBarOutline);
+        window.draw(healthBar);
+
+        window.draw(healthBarOutlineDragon);
+        window.draw(healthBarDragon);
+
         window.display();
     }
     

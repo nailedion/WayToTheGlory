@@ -4,24 +4,33 @@
 #include "Monster.h"
 #include "MonsterAttack.h"
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
-MonsterAttack::MonsterAttack(Monster& monster, unsigned int row, float speed, float width, float height, const float attackTime, float totalTime=0.f, float attackPositionXLeft=0.f, float attackPositionXRight=0.f, float attackPositionY=0.f) :
-    monster(&monster), ROW(row), attackSpeed(speed), attackTime(attackTime), totalTime(totalTime), attackPositionXLeft(attackPositionXLeft), attackPositionXRight(attackPositionXRight), attackPositionY(attackPositionY)
+MonsterAttack::MonsterAttack(Monster& monster, unsigned int row, float speed, float width, float height, const float attackTime, float totalTime=0.f, float attackPositionXLeft=0.f, float attackPositionXRight=0.f, float attackPositionY=0.f, unsigned int damage=0) :
+    monster(&monster), ROW(row), attackSpeed(speed), attackTime(attackTime), totalTime(totalTime), attackPositionXLeft(attackPositionXLeft), attackPositionXRight(attackPositionXRight), attackPositionY(attackPositionY), damage(damage)
 {
     attackBody.setSize(sf::Vector2f(width, height));
+    attackBody.setOrigin(width / 2.f, height / 2.f); //Set the origin of the attack hitbox to the center of the hitbox
 }
+
 MonsterAttack::~MonsterAttack()
 {
 }
 
-void MonsterAttack::Update(float deltaTime, Player& player)
+void MonsterAttack::Update(float deltaTime, Player& player, sf::RectangleShape& healthBar)
 {
     monster->setRow(ROW); //Set the row of the attack animation
     totalTime += deltaTime; //Update the attack time
 
     if(totalTime >= attackTime) //If the attack time is over
     {
+        if(attackBody.getGlobalBounds().intersects(player.getBody().getGlobalBounds())) //If the attack hitbox intersects with the player hitbox
+        // if(abs(attackBody.getPosition().x - player.getPosition().x) < 50.f && abs(attackBody.getPosition().y-player.getPosition().y)< 30.f ) //If the player is in the range
+        {
+            // std::cout << "Collision detected!" << std::endl;
+            player.setHealth(player.getHealth() - this->damage, healthBar); //Set the player health to the new health
+        }
         totalTime = 0; //Reset the attack time
         monster->setIsAttacking(false); //Set the monster to not attacking
     }

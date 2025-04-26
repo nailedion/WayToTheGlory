@@ -23,6 +23,8 @@ class Entity
         bool getFaceRight() const;
         const sf::RectangleShape& getBody() const;
         const Animation& getAnimation() const;
+        const unsigned int getHealth() const { return health; }
+        const unsigned int getMaxHealth() const { return maxHealth; }
 
         void setRow(const unsigned int ROW);
         void setFaceRight(const bool faceRight) { this->faceRight = faceRight; }

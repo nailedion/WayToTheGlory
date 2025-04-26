@@ -20,14 +20,19 @@ class MonsterAttack{
         float attackPositionXLeft;
         float attackPositionXRight;
         float attackPositionY;
+        unsigned int damage;
 
     public:
-        MonsterAttack(Monster&, const unsigned int, float, float, float, const float, float, float, float, float);
+        MonsterAttack(Monster&, const unsigned int, float, float, float, const float, float, float, float, float, unsigned int);
         ~MonsterAttack();
 
         float getAttackSpeed() const;
         const float getTotalTime() const { return totalTime; }
+        const unsigned int getDamage() const { return damage; }
+        const float getAttackTime() const { return attackTime; }
 
-        void Update(float, Player&);
+        void setTotalTime(float totalTime) { this->totalTime = totalTime; }
+
+        void Update(float, Player&, sf::RectangleShape&);
         void Draw(sf::RenderWindow&, Monster&);
 };

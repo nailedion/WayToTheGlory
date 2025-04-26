@@ -29,16 +29,8 @@ int main()
 
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
-    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100.f, 100.f);
-    Attack playerAttack(player, 2, 150.f);
-
-    sf::Texture dragonTexture;
-    dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png");
-    Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 100.f, 100.f, false);
-    MonsterAttack dragonAttack(dragon, 2, 150.f, 50.f, 50.f, 1.6f,0.f, 100.f, 70.f, 0.f);
-
-    float deltaTime = 0.f;
-    sf::Clock clock;
+    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
+    Attack playerAttack(player, 2, 150.f, 10, 0.0f, 0.5f);
 
     sf::RectangleShape healthBar;
     healthBar.setSize(sf::Vector2f(200.f, 20.f));
@@ -51,16 +43,24 @@ int main()
     healthBarOutline.setOutlineColor(sf::Color::Black);
     healthBarOutline.setPosition(10.f, 10.f);
 
+    sf::Texture dragonTexture;
+    dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png");
+    Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 100, 100, false);
+    MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f,0.f, 40.f, 30.f, 10.f, 10);
+
     sf::RectangleShape healthBarDragon;
     healthBarDragon.setSize(sf::Vector2f(200.f, 20.f));
     healthBarDragon.setFillColor(sf::Color::Red);
-    healthBarDragon.setPosition(1080.f, 10.f);
+    healthBarDragon.setPosition(1070.f, 10.f);
     sf::RectangleShape healthBarOutlineDragon;
     healthBarOutlineDragon.setSize(sf::Vector2f(200.f, 20.f));
     healthBarOutlineDragon.setFillColor(sf::Color::Transparent);
     healthBarOutlineDragon.setOutlineThickness(2.f);
     healthBarOutlineDragon.setOutlineColor(sf::Color::Black);
-    healthBarOutlineDragon.setPosition(1080.f, 10.f);
+    healthBarOutlineDragon.setPosition(1070.f, 10.f);
+
+    float deltaTime = 0.f;
+    sf::Clock clock;
 
     while (window.isOpen())
     {
@@ -85,15 +85,16 @@ int main()
             }
         }
 
-        playerAttack.Update(deltaTime);
+        playerAttack.Update(deltaTime, dragon, healthBarDragon);
         player.Update(deltaTime, playerAttack);
         
-        dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f);
+        dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f, healthBar);
 
         window.draw(backgroundSprite);
 
         player.Draw(window);
-        playerAttack.Draw(window);
+        // playerAttack.Draw(window);
+        
         dragon.Draw(window, dragonAttack);
         
         window.draw(healthBarOutline);

@@ -15,6 +15,16 @@ class Player: public Entity
         ~Player();
 
         sf::Vector2f getPosition() const;
+
+        void setHealth(float health, sf::RectangleShape& healthBar)
+        {
+            if(health < 0.f)
+                this->health = 0.f;
+            else
+                this->health = health;
+            healthBar.setSize(sf::Vector2f(200.f * (float(this->health) / maxHealth), 20.f));
+        }
+
         void Update(float deltaTime, Attack&);
         void Draw(sf::RenderWindow&);
         bool isMoving() const;

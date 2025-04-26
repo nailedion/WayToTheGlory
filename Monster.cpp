@@ -16,12 +16,20 @@ Monster::~Monster()
 {
 }
 
-void Monster::Update(float deltaTime, Player& player, MonsterAttack& monsterAttack, float attackDistanceXLeft = 0.f, float attackDistanceXRight = 0.f, float attackDistanceYUp = 0.f, float attackDistanceYDown = 0.f)
+void Monster::Update(float deltaTime, Player& player, MonsterAttack& monsterAttack, float attackDistanceXLeft, float attackDistanceXRight, float attackDistanceYUp, float attackDistanceYDown, sf::RectangleShape& healthBar)
 {
+    if (health <= 0.f) //If the monster is dead
+    {
+        row = 3; //Set the monster to the dead animation
+        if(animation.getCurrentImage().x < animation.getImageCount().x - 1) //If the monster is not dead(last image of being dead) update the animation
+            animation.Update(row, deltaTime, faceRight);
+        body.setTextureRect(animation.getUVRect());
+        return;
+    }
 
     if(isAttacking)
     {
-        monsterAttack.Update(deltaTime, player);
+        monsterAttack.Update(deltaTime, player, healthBar); //Update the attack animation
         animation.Update(row, deltaTime, faceRight);
         body.setTextureRect(animation.getUVRect()); 
         return;
@@ -64,5 +72,5 @@ void Monster::Update(float deltaTime, Player& player, MonsterAttack& monsterAtta
 void Monster::Draw(sf::RenderWindow& window, MonsterAttack& monsterAttack)
 {
     window.draw(this->body);
-    monsterAttack.Draw(window, *this); //Draw the attack hitbox
+    // monsterAttack.Draw(window, *this); //Draw the attack hitbox just for testing purposes
 }

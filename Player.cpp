@@ -25,6 +25,15 @@ sf::Vector2f Player::getPosition() const
 
 void Player::Update(float deltaTime, Attack& playerAttack)
 {
+    if (health <= 0) //If the player is dead
+    {
+        row = 3; //Set the player to the dead animation
+        if(animation.getCurrentImage().x < animation.getImageCount().x - 1) //If the monster is not dead(last image of being dead) update the animation
+            animation.Update(row, deltaTime, faceRight);
+        body.setTextureRect(animation.getUVRect());
+        return;
+    }
+
     if(playerAttack.getIsAttacking()){
         animation.Update(row, deltaTime * playerAttack.getAttackSpeed()/speed, faceRight);
         return;

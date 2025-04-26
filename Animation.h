@@ -18,6 +18,8 @@ class Animation
         ~Animation();
 
         const sf::IntRect getUVRect() const;
+        const sf::Vector2u getImageCount() const { return imageCount; }
+        const sf::Vector2u getCurrentImage() const { return currentImage; }
 
         void setUVRect(const sf::IntRect&);
 

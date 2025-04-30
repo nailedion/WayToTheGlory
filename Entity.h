@@ -18,16 +18,18 @@ class Entity
     public:
         Entity(sf::Texture*, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int);
         Entity(const Entity&);
+        virtual Entity* clone() const = 0;
         ~Entity();
 
         bool getFaceRight() const;
-        const sf::RectangleShape& getBody() const;
+        virtual const sf::RectangleShape& getBody() const;
         const Animation& getAnimation() const;
         const unsigned int getHealth() const { return health; }
         const unsigned int getMaxHealth() const { return maxHealth; }
 
         void setRow(const unsigned int ROW);
         void setFaceRight(const bool faceRight) { this->faceRight = faceRight; }
+        void setPosition(float x, float y) { body.setPosition(x, y); }
 
         Entity& operator=(const Entity&);
 };

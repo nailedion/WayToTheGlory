@@ -2,8 +2,10 @@
 #include "Entity.h"
 #include "Monster.h"
 #include "Attack.h"
+#include "Meteorit.h"
 
 #include <iostream>
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 // class Monster; // Forward declaration of Monster class
@@ -18,7 +20,7 @@ Attack::~Attack()
 {
 }
 
-bool Attack::Update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon)
+bool Attack::Update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon, std::vector<Meteorit*>& meteorites)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isAttacking)
     {
@@ -35,16 +37,21 @@ bool Attack::Update(float deltaTime, Monster& dragon, sf::RectangleShape& health
             attackBody.setPosition(entity->getBody().getPosition().x - 50.f, entity->getBody().getPosition().y - 15.f);
         attackBody.setTextureRect(entity->getAnimation().getUVRect());
 
-        // if(dragon.getBody().getGlobalBounds().intersects(attackBody.getGlobalBounds()))
-        if(abs(dragon.getBody().getPosition().x - attackBody.getPosition().x) < 110.f && abs(dragon.getBody().getPosition().y - attackBody.getPosition().y) < 25.f)
-        {
-            // std::cout << "Collision detected!" << std::endl;
-            if(attackTime >= totalTime)
+
+        if(attackTime >= totalTime){
+            // if(dragon.getBody().getGlobalBounds().intersects(attackBody.getGlobalBounds()))
+            if(abs(dragon.getBody().getPosition().x - attackBody.getPosition().x) < 110.f && abs(dragon.getBody().getPosition().y - attackBody.getPosition().y) < 25.f)
             {
-                attackTime = 0; // Reset the attack time
+                // std::cout << "Collision detected!" << std::endl;
                 dragon.setHealth(dragon.getHealth() - damage, healthBarDragon); // Reduce the monster's health by the attack damage
                 // std::cout << "Monster health: " << dragon.getHealth() << std::endl;
             }
+
+            for (auto& meteorit : meteorites)
+                    if (attackBody.getGlobalBounds().intersects(meteorit->getBody().getGlobalBounds()))
+                        meteorit->takeDamage(damage);
+
+            attackTime = 0; // Reset the attack time
         }
     }
     else

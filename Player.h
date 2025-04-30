@@ -28,4 +28,8 @@ class Player: public Entity
         void Update(float deltaTime, Attack&);
         void Draw(sf::RenderWindow&);
         bool isMoving() const;
+
+        Entity* clone() const override {
+            return new Player(*this);
+        }    
 };

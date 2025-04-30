@@ -2,8 +2,10 @@
 
 #include "Animation.h"
 #include "Entity.h"
+#include "Meteorit.h"
 // #include "Monster.h"
 
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 class Monster; // Forward declaration of Monster class
@@ -27,6 +29,6 @@ class Attack
         bool getIsAttacking() const { return this->isAttacking; }
         float getAttackSpeed() const { return this->attackSpeed; }
 
-        bool Update(float deltaTime, Monster&, sf::RectangleShape&);
+        bool Update(float deltaTime, Monster&, sf::RectangleShape&, std::vector<Meteorit*>&);
         void Draw(sf::RenderWindow& window);
 };

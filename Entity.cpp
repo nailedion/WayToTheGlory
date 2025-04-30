@@ -31,6 +31,8 @@ Entity::Entity(const Entity& entity) :
     this->row = entity.row;
     this->speed = entity.speed;
     this->faceRight = entity.faceRight;
+    this->health = entity.health;
+    this->maxHealth = entity.maxHealth;
 }
 
 Entity::~Entity()

@@ -26,12 +26,18 @@ class Monster: public Entity
     void setHealth(float health, sf::RectangleShape& healthBar)
     {
         if(health < 0.f)
-            health = 0.f;
+            this->health = 0.f;
         else
             this->health = health;
         healthBar.setSize(sf::Vector2f(200.f * (health / maxHealth), 20.f));
+        if(this->health <= 0.f)
+            healthBar.setSize(sf::Vector2f(0.f, 20.f)); ///Sometimes the health bar goes negative, so we set it to 0.f
     }
 
     void Update(float, Player&, MonsterAttack&, float, float, float, float, sf::RectangleShape&);
     void Draw(sf::RenderWindow&, MonsterAttack&);
+
+    Entity* clone() const override {
+        return new Monster(*this);
+    }    
 };

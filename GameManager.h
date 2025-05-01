@@ -9,7 +9,22 @@ protected:
     std::vector<Entity*> meteorites;
 
 public:
+    void operator=(const GameManager& other) {
+        if (this != &other) {
+            swap(meteorites, other.meteorites);
+        }
+    }
+
+    friend void swap(GameManager& first, GameManager& second) {
+        std::swap(first.meteorites, second.meteorites);
+    }
+
     GameManager() = default;
+    GameManager(const GameManager& other) {
+        for (const auto& meteorite : other.meteorites) {
+            meteorites.push_back(meteorite->clone()); // Assuming clone() creates a deep copy
+        }
+    }
     ~GameManager() {
         for (auto& meteorite : meteorites) {
             delete meteorite;

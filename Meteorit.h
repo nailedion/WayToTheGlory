@@ -49,4 +49,6 @@ public:
     virtual Entity* clone() const override {
         return new Meteorit(*this);
     }
+
+    void killIfCollides(Monster& dragon);
 };

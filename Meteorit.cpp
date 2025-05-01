@@ -30,3 +30,9 @@ void Meteorit::spown(float deltaTime, std::vector<Meteorit*>& meteorites, GameMa
         }
     }
 }
+
+void Meteorit::killIfCollides(Monster& dragon) {
+    if (std::abs(this->getBody().getPosition().x - dragon.getBody().getPosition().x)< 50.f && std::abs(this->getBody().getPosition().y - dragon.getBody().getPosition().y) < 25.f) {
+        this->health=0; // Set the monster's health to 0 if it collides with the meteorite
+    }
+}   

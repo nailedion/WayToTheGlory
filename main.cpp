@@ -64,7 +64,7 @@ int main()
 
     sf::Texture meteoritTexture;
     meteoritTexture.loadFromFile("Textures/meteorit.png");
-    Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 20.f, 0.f);
+    Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 1.f, 0.f);
     std::vector<Meteorit*> meteorites;
 
     GameManager gameManager;

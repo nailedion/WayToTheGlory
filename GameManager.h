@@ -9,7 +9,7 @@ protected:
     std::vector<Entity*> meteorites;
 
 public:
-    void operator=(const GameManager& other) {
+    void operator=(GameManager& other) {
         if (this != &other) {
             swap(meteorites, other.meteorites);
         }
@@ -38,7 +38,7 @@ public:
     void removeMeteorite(Entity* meteorite) {
         auto it = std::remove(meteorites.begin(), meteorites.end(), meteorite);
         if (it != meteorites.end()) {
-            delete *it; // Free the memory
+            delete *it;
             meteorites.erase(it, meteorites.end());
         }
     }
@@ -47,6 +47,10 @@ public:
         for (auto& meteorite : meteorites) {
             if (meteorite->getIsAlive()) {
                 meteorite->update(deltaTime, dragon, healthBarDragon);
+            }
+
+            if (Meteorit* metheorite = dynamic_cast<Meteorit*>(meteorite)) {
+                metheorite->killIfCollides(dragon);
             }
         }
     }

@@ -39,14 +39,10 @@ Entity::~Entity()
 {
 }
 
-Entity& Entity::operator=(const Entity& entity)
+Entity& Entity::operator=(Entity& entity)
 {
     if (this != &entity) {
-        this->body = entity.body;
-        this->animation = entity.animation;
-        this->row = entity.row;
-        this->speed = entity.speed;
-        this->faceRight = entity.faceRight;
+        swap(*this, entity);
     }
     return *this;
 }

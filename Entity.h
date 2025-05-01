@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 
+class Monster; // Forward declaration of Monster class
+
 class Entity
 {
     protected:
@@ -32,4 +34,7 @@ class Entity
         void setPosition(float x, float y) { body.setPosition(x, y); }
 
         Entity& operator=(const Entity&);
+
+        virtual bool getIsAlive() const = 0;
+        virtual void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon) = 0;
 };

@@ -39,5 +39,10 @@ class Monster: public Entity
 
     Entity* clone() const override {
         return new Monster(*this);
-    }    
+    }
+
+    virtual bool getIsAlive() const override { return this->getHealth() > 0; }
+    virtual void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon) override{
+        // Monster-specific update logic can be added here if needed
+    }
 };

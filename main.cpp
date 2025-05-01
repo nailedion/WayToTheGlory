@@ -6,6 +6,7 @@
 #include "Attack.h"
 #include "Monster.h"
 #include "Meteorit.h"
+#include "GameManager.h"
 
 #include <iostream>
 #include <vector>
@@ -63,8 +64,10 @@ int main()
 
     sf::Texture meteoritTexture;
     meteoritTexture.loadFromFile("Textures/meteorit.png");
-    Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 30.f, 0.f);
+    Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 20.f, 0.f);
     std::vector<Meteorit*> meteorites;
+
+    GameManager gameManager;
 
     float deltaTime = 0.f;
     sf::Clock clock;
@@ -97,15 +100,12 @@ int main()
         
         dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f, healthBar);
 
-        meteorit->spown(deltaTime, meteorites);
+        meteorit->spown(deltaTime, meteorites, gameManager);
 
-        if(dragon.getHealth() > 0.f)
-            for (int i = 0; i < meteorites.size(); ++i)
-                if (meteorites[i]->getHealth() > 0.f)
-                    meteorites[i]->update(deltaTime, dragon, healthBarDragon);
+        gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
 
         for (int i = 0; i < meteorites.size(); ++i)
-            if (meteorites[i]->getHealth() > 0.f)
+            if (meteorites[i]->getHealth() <= 0.f)
                 meteorites.erase(meteorites.begin() + i);
 
         window.draw(backgroundSprite);

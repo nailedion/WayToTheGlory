@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+// #include "GameManager.h"
 // #include "Monster.h"
 
 #include <iostream>
@@ -8,6 +9,7 @@
 #include <vector>
 
 class Monster;
+class GameManager; // Forward declaration of GameManager class
 
 class Meteorit : public Entity {
 private:
@@ -23,7 +25,7 @@ public:
             body.setOrigin(width / 2.f, height / 2.f);
         }
 
-    bool getIsAlive() const { return this->getHealth() > 0; }
+    virtual bool getIsAlive() const { return this->getHealth() > 0; }
 
     void takeDamage(float damage) {
         health -= damage;
@@ -32,7 +34,7 @@ public:
         }
     }
 
-    void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon);
+    virtual void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon);
 
     void draw(sf::RenderWindow& window)
     {
@@ -42,22 +44,7 @@ public:
         }
     }
 
-    void spown(float deltaTime, std::vector<Meteorit*>& meteorites) {
-        spownTimer += deltaTime;
-        if (spownTimer >= spownTime) {
-            spownTimer = 0.f;
-        
-            for(int i =0; i<3 ; i++)
-            {
-                Meteorit* meteorit = static_cast<Meteorit*>(this->clone());
-
-                unsigned int x = 15 + rand() % (1265 - 15 + 1), y = 25 + rand() % (775 - 25 + 1);
-                body.setPosition(x, y);
-
-                meteorites.push_back(meteorit);
-            }
-        }
-    }
+    void spown(float deltaTime, std::vector<Meteorit*>& meteorites, GameManager& gameManager);
 
     virtual Entity* clone() const override {
         return new Meteorit(*this);

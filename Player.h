@@ -31,5 +31,10 @@ class Player: public Entity
 
         Entity* clone() const override {
             return new Player(*this);
-        }    
+        }
+
+        virtual bool getIsAlive() const override{ return this->getHealth() > 0; }
+        virtual void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon) override{
+            // Player-specific update logic can be added here if needed
+        }
 };

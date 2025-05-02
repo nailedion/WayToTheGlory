@@ -7,6 +7,7 @@
 #include "Monster.h"
 #include "Meteorit.h"
 #include "GameManager.h"
+#include "ExceptionTypes.h"
 
 #include <iostream>
 #include <vector>
@@ -14,118 +15,135 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 800), "WayToTheGlory", sf::Style::Default);
-    
-    sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("Textures/Background.jpg")) {
+    try {
+        sf::RenderWindow window(sf::VideoMode(1280, 800), "WayToTheGlory", sf::Style::Default);
+        
+        sf::Texture backgroundTexture;
+        if (!backgroundTexture.loadFromFile("Textures/Background.jpg")) {
+            throw FileLoadException("Textures/Background.jpg");
+        }
+
+        sf::Sprite backgroundSprite(backgroundTexture);
+
+        sf::Vector2u textureSize = backgroundTexture.getSize();
+        sf::Vector2u windowSize = window.getSize();
+        backgroundSprite.setScale(
+            float(windowSize.x) / textureSize.x,
+            float(windowSize.y) / textureSize.y
+        );
+
+        sf::Texture playerTexture;
+        if(!playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png"))
+            throw FileLoadException("Textures/Warrior_texture_pack_transparent-background.png");
+        Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
+        Attack playerAttack(player, 2, 150.f, 10, 0.0f, 0.5f);
+
+        sf::RectangleShape healthBar;
+        healthBar.setSize(sf::Vector2f(200.f, 20.f));
+        healthBar.setFillColor(sf::Color::Red);
+        healthBar.setPosition(10.f, 10.f);
+        sf::RectangleShape healthBarOutline;
+        healthBarOutline.setSize(sf::Vector2f(200.f, 20.f));
+        healthBarOutline.setFillColor(sf::Color::Transparent);
+        healthBarOutline.setOutlineThickness(2.f);
+        healthBarOutline.setOutlineColor(sf::Color::Black);
+        healthBarOutline.setPosition(10.f, 10.f);
+
+        sf::Texture dragonTexture;
+        if(!dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png"))
+            throw FileLoadException("Textures/Dragon_texture_pack_transparent_background.png");
+        Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 200, 200, false);
+        MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f,0.f, 40.f, 30.f, 10.f, 10);
+
+        sf::RectangleShape healthBarDragon;
+        healthBarDragon.setSize(sf::Vector2f(200.f, 20.f));
+        healthBarDragon.setFillColor(sf::Color::Red);
+        healthBarDragon.setPosition(1070.f, 10.f);
+        sf::RectangleShape healthBarOutlineDragon;
+        healthBarOutlineDragon.setSize(sf::Vector2f(200.f, 20.f));
+        healthBarOutlineDragon.setFillColor(sf::Color::Transparent);
+        healthBarOutlineDragon.setOutlineThickness(2.f);
+        healthBarOutlineDragon.setOutlineColor(sf::Color::Black);
+        healthBarOutlineDragon.setPosition(1070.f, 10.f);
+
+        sf::Texture meteoritTexture;
+        if(!meteoritTexture.loadFromFile("Textures/meteorit.png"))
+            throw FileLoadException("Textures/meteorit.png");
+        Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
+        std::vector<Meteorit*> meteorites;
+
+        GameManager gameManager;
+
+        float deltaTime = 0.f;
+        sf::Clock clock;
+
+        while (window.isOpen())
+        {
+            deltaTime = clock.restart().asSeconds();
+
+            sf::Event evnt;
+            while (window.pollEvent(evnt))
+            {
+                switch (evnt.type)
+                {
+                    case sf::Event::Closed:
+                        window.close();
+                        break;
+                    
+                    case sf::Event::KeyPressed:
+                        if (evnt.key.code == sf::Keyboard::Escape)
+                            window.close();
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+
+            playerAttack.Update(deltaTime, dragon, healthBarDragon, meteorites);
+            player.Update(deltaTime, playerAttack);
+            
+            dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f, healthBar);
+
+            meteorit->spown(deltaTime, meteorites, gameManager);
+
+            gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
+
+            for (int i = 0; i < meteorites.size(); ++i)
+                if (meteorites[i]->getHealth() <= 0.f)
+                    meteorites.erase(meteorites.begin() + i);
+
+            window.draw(backgroundSprite);
+
+            player.Draw(window);
+            // playerAttack.Draw(window);
+            
+            dragon.Draw(window, dragonAttack);
+            
+            window.draw(healthBarOutline);
+            window.draw(healthBar);
+
+            window.draw(healthBarOutlineDragon);
+            window.draw(healthBarDragon);
+
+            for (auto& meteorite : meteorites)
+                meteorite->draw(window);
+
+            window.display();
+        }
+    } catch (const FileLoadException& e) {
+        std::cerr << e.what() << std::endl;
+        return -1;
+    } catch (const InvalidEntityException& e) {
+        std::cerr << e.what() << std::endl;
+        return -1;
+    } catch (const StateException& e) {
+        std::cerr << e.what() << std::endl;
+        return -1;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
         return -1;
     }
 
-    sf::Sprite backgroundSprite(backgroundTexture);
-
-    sf::Vector2u textureSize = backgroundTexture.getSize();
-    sf::Vector2u windowSize = window.getSize();
-    backgroundSprite.setScale(
-        float(windowSize.x) / textureSize.x,
-        float(windowSize.y) / textureSize.y
-    );
-
-    sf::Texture playerTexture;
-    playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png");
-    Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
-    Attack playerAttack(player, 2, 150.f, 10, 0.0f, 0.5f);
-
-    sf::RectangleShape healthBar;
-    healthBar.setSize(sf::Vector2f(200.f, 20.f));
-    healthBar.setFillColor(sf::Color::Red);
-    healthBar.setPosition(10.f, 10.f);
-    sf::RectangleShape healthBarOutline;
-    healthBarOutline.setSize(sf::Vector2f(200.f, 20.f));
-    healthBarOutline.setFillColor(sf::Color::Transparent);
-    healthBarOutline.setOutlineThickness(2.f);
-    healthBarOutline.setOutlineColor(sf::Color::Black);
-    healthBarOutline.setPosition(10.f, 10.f);
-
-    sf::Texture dragonTexture;
-    dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png");
-    Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 100, 100, false);
-    MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f,0.f, 40.f, 30.f, 10.f, 10);
-
-    sf::RectangleShape healthBarDragon;
-    healthBarDragon.setSize(sf::Vector2f(200.f, 20.f));
-    healthBarDragon.setFillColor(sf::Color::Red);
-    healthBarDragon.setPosition(1070.f, 10.f);
-    sf::RectangleShape healthBarOutlineDragon;
-    healthBarOutlineDragon.setSize(sf::Vector2f(200.f, 20.f));
-    healthBarOutlineDragon.setFillColor(sf::Color::Transparent);
-    healthBarOutlineDragon.setOutlineThickness(2.f);
-    healthBarOutlineDragon.setOutlineColor(sf::Color::Black);
-    healthBarOutlineDragon.setPosition(1070.f, 10.f);
-
-    sf::Texture meteoritTexture;
-    meteoritTexture.loadFromFile("Textures/meteorit.png");
-    Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 1.f, 0.f);
-    std::vector<Meteorit*> meteorites;
-
-    GameManager gameManager;
-
-    float deltaTime = 0.f;
-    sf::Clock clock;
-
-    while (window.isOpen())
-    {
-        deltaTime = clock.restart().asSeconds();
-
-        sf::Event evnt;
-        while (window.pollEvent(evnt))
-        {
-            switch (evnt.type)
-            {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                
-                case sf::Event::KeyPressed:
-                    if (evnt.key.code == sf::Keyboard::Escape)
-                        window.close();
-                    break;
-                
-                default:
-                    break;
-            }
-        }
-
-        playerAttack.Update(deltaTime, dragon, healthBarDragon, meteorites);
-        player.Update(deltaTime, playerAttack);
-        
-        dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f, healthBar);
-
-        meteorit->spown(deltaTime, meteorites, gameManager);
-
-        gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
-
-        for (int i = 0; i < meteorites.size(); ++i)
-            if (meteorites[i]->getHealth() <= 0.f)
-                meteorites.erase(meteorites.begin() + i);
-
-        window.draw(backgroundSprite);
-
-        player.Draw(window);
-        // playerAttack.Draw(window);
-        
-        dragon.Draw(window, dragonAttack);
-        
-        window.draw(healthBarOutline);
-        window.draw(healthBar);
-
-        window.draw(healthBarOutlineDragon);
-        window.draw(healthBarDragon);
-
-        for (auto& meteorite : meteorites)
-            meteorite->draw(window);
-
-        window.display();
-    }
-    
     return 0;
 }

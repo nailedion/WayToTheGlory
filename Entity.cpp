@@ -1,11 +1,15 @@
 #include "Entity.h"
 #include "Animation.h"
+#include "ExceptionTypes.h"
 
 #include <SFML/Graphics.hpp>
 
 Entity::Entity(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth) :
     animation(texture, imageCount, switchTime), health(health), maxHealth(maxHealth)
 {
+    if (health > maxHealth) {
+        throw InvalidEntityException("Entity health exceeds maxHealth");
+    }
     this->speed = speed;
     row = 0;
     faceRight = true;

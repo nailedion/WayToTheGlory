@@ -1,6 +1,7 @@
 #include "Meteorit.h"
 #include "Monster.h" // Full definition needed here
 #include "GameManager.h" // Include full definition of GameManager class
+#include "ExceptionTypes.h"
 
 void Meteorit::update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon) {
     if (!this->getIsAlive()) return;
@@ -9,7 +10,7 @@ void Meteorit::update(float deltaTime, Monster& dragon, sf::RectangleShape& heal
     if (healTimer >= healInterval) {
         healTimer = 0.f;
         if (dragon.getHealth() < dragon.getMaxHealth())
-            dragon.setHealth(dragon.getHealth() + 10, healthBarDragon);
+            dragon.setHealth(dragon.getHealth() + 5, healthBarDragon);
     }
 }
 

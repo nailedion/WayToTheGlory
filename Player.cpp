@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "Entity.h"
 #include "Attack.h"
+#include "ExceptionTypes.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -37,6 +38,11 @@ void Player::Update(float deltaTime, Attack& playerAttack)
     if(playerAttack.getIsAttacking()){
         animation.Update(row, deltaTime * playerAttack.getAttackSpeed()/speed, faceRight);
         return;
+    }
+
+    if (body.getPosition().x < 0 || body.getPosition().x > 1280 || 
+        body.getPosition().y < 0 || body.getPosition().y > 800) {
+        throw StateException("Player has moved out of bounds!");
     }
 
     sf::Vector2f movement(0.f, 0.f);

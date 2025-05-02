@@ -53,7 +53,7 @@ int main()
         sf::Texture dragonTexture;
         if (!dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png"))
             throw FileLoadException("Textures/Dragon_texture_pack_transparent_background.png");
-        Monster dragon(&dragonTexture, sf::Vector2u(7, 5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 200, 200, false);
+        Monster dragon(&dragonTexture, sf::Vector2u(7, 5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 500, 500, false);
         MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f, 0.f, 40.f, 30.f, 10.f, 10);
 
         sf::RectangleShape healthBarDragon;

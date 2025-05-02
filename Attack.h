@@ -2,7 +2,7 @@
 
 #include "Animation.h"
 #include "Entity.h"
-#include "Meteorit.h"
+#include "Meteorite.h"
 // #include "Monster.h"
 
 #include <vector>
@@ -29,6 +29,6 @@ public:
     bool getIsAttacking() const;
     float getAttackSpeed() const;
 
-    bool Update(float deltaTime, Monster &, sf::RectangleShape &, std::vector<Meteorit *> &);
+    bool Update(float deltaTime, Monster &, sf::RectangleShape &, std::vector<Meteorite *> &);
     void Draw(sf::RenderWindow &window);
 };

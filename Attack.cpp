@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "Monster.h"
 #include "Attack.h"
-#include "Meteorit.h"
+#include "Meteorite.h"
 
 #include <iostream>
 #include <vector>
@@ -23,7 +23,7 @@ bool Attack::getIsAttacking() const { return this->isAttacking; }
 
 float Attack::getAttackSpeed() const { return this->attackSpeed; }
 
-bool Attack::Update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon, std::vector<Meteorit *> &meteorites)
+bool Attack::Update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon, std::vector<Meteorite *> &meteorites)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isAttacking)
     {
@@ -50,9 +50,9 @@ bool Attack::Update(float deltaTime, Monster &dragon, sf::RectangleShape &health
                 // std::cout << "Monster health: " << dragon.getHealth() << std::endl;
             }
 
-            for (auto &meteorit : meteorites)
-                if (attackBody.getGlobalBounds().intersects(meteorit->getBody().getGlobalBounds()))
-                    meteorit->takeDamage(damage);
+            for (auto &meteorite : meteorites)
+                if (attackBody.getGlobalBounds().intersects(meteorite->getBody().getGlobalBounds()))
+                    meteorite->takeDamage(damage);
 
             attackTime = 0; // Reset the attack time
         }

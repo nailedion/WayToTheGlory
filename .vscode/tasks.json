@@ -13,7 +13,7 @@
                 "${workspaceFolder}/Attack.cpp",
                 "${workspaceFolder}/Monster.cpp",
                 "${workspaceFolder}/MonsterAttack.cpp",
-                "${workspaceFolder}/Meteorit.cpp",
+                "${workspaceFolder}/Meteorite.cpp",
                 "${workspaceFolder}/ExceptionTypes.cpp",
                 "${workspaceFolder}/GameManager.cpp",
                 "${file}",

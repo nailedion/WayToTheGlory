@@ -1,5 +1,5 @@
 #include "GameManager.h"
-#include "Meteorit.h"
+#include "Meteorite.h"
 #include "Monster.h"
 
 void GameManager::operator=(GameManager &other)
@@ -55,9 +55,9 @@ void GameManager::updateMeteorites(float deltaTime, Monster &dragon, sf::Rectang
             meteorite->update(deltaTime, dragon, healthBarDragon);
         }
 
-        if (Meteorit *metheorite = dynamic_cast<Meteorit *>(meteorite))
+        if (Meteorite *castedMeteorite = dynamic_cast<Meteorite *>(meteorite))
         {
-            metheorite->killIfCollides(dragon);
+            castedMeteorite->killIfCollides(dragon);
         }
     }
 }

@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "Attack.h"
 #include "Monster.h"
-#include "Meteorit.h"
+#include "Meteorite.h"
 #include "GameManager.h"
 #include "ExceptionTypes.h"
 
@@ -67,11 +67,11 @@ int main()
         healthBarOutlineDragon.setOutlineColor(sf::Color::Black);
         healthBarOutlineDragon.setPosition(1070.f, 10.f);
 
-        sf::Texture meteoritTexture;
-        if (!meteoritTexture.loadFromFile("Textures/meteorit.png"))
-            throw FileLoadException("Textures/meteorit.png");
-        Meteorit *meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
-        std::vector<Meteorit *> meteorites;
+        sf::Texture meteoriteTexture;
+        if (!meteoriteTexture.loadFromFile("Textures/Meteorite.png"))
+            throw FileLoadException("Textures/Meteorite.png");
+        Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
+        std::vector<Meteorite *> meteorites;
 
         GameManager gameManager;
 
@@ -106,7 +106,7 @@ int main()
 
             dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f, 50.f, 10.f, healthBar);
 
-            meteorit->spown(deltaTime, meteorites, gameManager);
+            meteorite->spown(deltaTime, meteorites, gameManager);
 
             gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
 

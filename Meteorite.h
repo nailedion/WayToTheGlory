@@ -11,7 +11,7 @@
 class Monster;
 class GameManager; // Forward declaration of GameManager class
 
-class Meteorit : public Entity
+class Meteorite : public Entity
 {
 private:
     float healInterval;
@@ -20,7 +20,7 @@ private:
     float spownTimer;
 
 public:
-    Meteorit(sf::Texture*, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int, float, float, float, float);
+    Meteorite(sf::Texture*, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int, float, float, float, float);
 
     virtual bool getIsAlive() const;
 
@@ -30,7 +30,7 @@ public:
 
     void draw(sf::RenderWindow &window);
 
-    void spown(float deltaTime, std::vector<Meteorit *> &meteorites, GameManager &gameManager);
+    void spown(float deltaTime, std::vector<Meteorite *> &meteorites, GameManager &gameManager);
 
     virtual Entity *clone() const override;
 

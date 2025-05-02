@@ -12,23 +12,23 @@ class Monster; // Forward declaration of Monster class
 
 class Attack
 {
-    private:
-        Entity *entity;
-        sf::RectangleShape attackBody;
-        const unsigned int ROW;
-        float attackSpeed;
-        bool isAttacking;
-        unsigned int damage;
-        float attackTime;
-        const float totalTime;
+private:
+    Entity *entity;
+    sf::RectangleShape attackBody;
+    const unsigned int ROW;
+    float attackSpeed;
+    bool isAttacking;
+    unsigned int damage;
+    float attackTime;
+    const float totalTime;
 
-    public:
-        Attack(Entity&, const unsigned int, float, unsigned int, float, float);
-        ~Attack();
+public:
+    Attack(Entity &, const unsigned int, float, unsigned int, float, float);
+    ~Attack();
 
-        bool getIsAttacking() const { return this->isAttacking; }
-        float getAttackSpeed() const { return this->attackSpeed; }
+    bool getIsAttacking() const;
+    float getAttackSpeed() const;
 
-        bool Update(float deltaTime, Monster&, sf::RectangleShape&, std::vector<Meteorit*>&);
-        void Draw(sf::RenderWindow& window);
+    bool Update(float deltaTime, Monster &, sf::RectangleShape &, std::vector<Meteorit *> &);
+    void Draw(sf::RenderWindow &window);
 };

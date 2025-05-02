@@ -9,30 +9,31 @@
 
 class Monster; // Forward declaration of Monster class
 
-class MonsterAttack{
-    private:
-        Monster* monster;
-        sf::RectangleShape attackBody;
-        const unsigned int ROW;
-        float attackSpeed;
-        const float attackTime;
-        float totalTime;
-        float attackPositionXLeft;
-        float attackPositionXRight;
-        float attackPositionY;
-        unsigned int damage;
+class MonsterAttack
+{
+private:
+    Monster *monster;
+    sf::RectangleShape attackBody;
+    const unsigned int ROW;
+    float attackSpeed;
+    const float attackTime;
+    float totalTime;
+    float attackPositionXLeft;
+    float attackPositionXRight;
+    float attackPositionY;
+    unsigned int damage;
 
-    public:
-        MonsterAttack(Monster&, const unsigned int, float, float, float, const float, float, float, float, float, unsigned int);
-        ~MonsterAttack();
+public:
+    MonsterAttack(Monster &, const unsigned int, float, float, float, const float, float, float, float, float, unsigned int);
+    ~MonsterAttack();
 
-        float getAttackSpeed() const;
-        const float getTotalTime() const { return totalTime; }
-        const unsigned int getDamage() const { return damage; }
-        const float getAttackTime() const { return attackTime; }
+    float getAttackSpeed() const;
+    const float getTotalTime() const;
+    const unsigned int getDamage() const;
+    const float getAttackTime() const;
 
-        void setTotalTime(float totalTime) { this->totalTime = totalTime; }
+    void setTotalTime(float totalTime);
 
-        void Update(float, Player&, sf::RectangleShape&);
-        void Draw(sf::RenderWindow&, Monster&);
+    void Update(float, Player &, sf::RectangleShape &);
+    void Draw(sf::RenderWindow &, Monster &);
 };

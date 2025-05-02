@@ -11,7 +11,8 @@
 class Monster;
 class GameManager; // Forward declaration of GameManager class
 
-class Meteorit : public Entity {
+class Meteorit : public Entity
+{
 private:
     float healInterval;
     float healTimer;
@@ -19,36 +20,19 @@ private:
     float spownTimer;
 
 public:
-    Meteorit(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, float width, float height, unsigned int health, unsigned int maxHealth, float healInterval = 10.f, float healTimer = 0.f, float spownTime = 0.f, float spownTimer = 0.f)
-        : Entity(texture, imageCount, switchTime, speed, x, y, width, height, health, maxHealth), healInterval(healInterval), healTimer(healTimer), spownTime(spownTime), spownTimer(spownTimer) {
-            body.setPosition(x, y);
-            body.setOrigin(width / 2.f, height / 2.f);
-        }
+    Meteorit(sf::Texture*, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int, float, float, float, float);
 
-    virtual bool getIsAlive() const { return this->getHealth() > 0; }
+    virtual bool getIsAlive() const;
 
-    void takeDamage(float damage) {
-        health -= damage;
-        if (health <= 0) {
-            health = 0;
-        }
-    }
+    void takeDamage(float damage);
 
-    virtual void update(float deltaTime, Monster& dragon, sf::RectangleShape& healthBarDragon);
+    virtual void update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon);
 
-    void draw(sf::RenderWindow& window)
-    {
-        if(this->getIsAlive())
-        {
-            window.draw(body);
-        }
-    }
+    void draw(sf::RenderWindow &window);
 
-    void spown(float deltaTime, std::vector<Meteorit*>& meteorites, GameManager& gameManager);
+    void spown(float deltaTime, std::vector<Meteorit *> &meteorites, GameManager &gameManager);
 
-    virtual Entity* clone() const override {
-        return new Meteorit(*this);
-    }
+    virtual Entity *clone() const override;
 
-    void killIfCollides(Monster& dragon);
+    void killIfCollides(Monster &dragon);
 };

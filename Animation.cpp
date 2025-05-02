@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(sf::Texture *texture, sf::Vector2u imageCount, float switchTime)
 {
     this->imageCount = imageCount;
     this->switchTime = switchTime;
@@ -14,29 +14,40 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
     uvRect.height = texture->getSize().y / float(imageCount.y);
 }
 
-Animation::Animation(const Animation& animation) :
-    imageCount(animation.imageCount),
-    currentImage(animation.currentImage),
-    totalTime(animation.totalTime),
-    switchTime(animation.switchTime),
-    uvRect(animation.uvRect)
+Animation::Animation(const Animation &animation) : imageCount(animation.imageCount),
+                                                   currentImage(animation.currentImage),
+                                                   totalTime(animation.totalTime),
+                                                   switchTime(animation.switchTime),
+                                                   uvRect(animation.uvRect)
 {
 }
 
-const sf::IntRect Animation::getUVRect() const {
+const sf::IntRect Animation::getUVRect() const
+{
     return uvRect;
 }
 
-void Animation::setUVRect(const sf::IntRect& rect) {
+const sf::Vector2u Animation::getImageCount() const
+{
+    return imageCount;
+}
+
+const sf::Vector2u Animation::getCurrentImage() const
+{
+    return currentImage;
+}
+
+void Animation::setUVRect(const sf::IntRect &rect)
+{
     uvRect = rect;
 }
 
 void Animation::Update(int row, float deltaTime, bool faceRight)
 {
-    currentImage.y =row;
+    currentImage.y = row;
     totalTime += deltaTime;
 
-    if(totalTime >= switchTime)
+    if (totalTime >= switchTime)
     {
         totalTime -= switchTime;
         currentImage.x++;
@@ -45,7 +56,7 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
     }
 
     uvRect.top = currentImage.y * uvRect.height;
-    if(faceRight)
+    if (faceRight)
     {
         uvRect.left = currentImage.x * uvRect.width;
         uvRect.width = abs(uvRect.width);

@@ -1,6 +1,6 @@
-///This game is reccommended to be played in 1280x800 resolution.
-///Try to beat the dragon by attacking it with your spear and dodging its fireball attacks.
-///You have approximately 3seconds to attack until the dragon attacks you with its fireball since you can attack him.
+/// This game is reccommended to be played in 1280x800 resolution.
+/// Try to beat the dragon by attacking it with your spear and dodging its fireball attacks.
+/// You have approximately 3seconds to attack until the dragon attacks you with its fireball since you can attack him.
 #include "Player.h"
 #include "Entity.h"
 #include "Attack.h"
@@ -15,11 +15,13 @@
 
 int main()
 {
-    try {
+    try
+    {
         sf::RenderWindow window(sf::VideoMode(1280, 800), "WayToTheGlory", sf::Style::Default);
-        
+
         sf::Texture backgroundTexture;
-        if (!backgroundTexture.loadFromFile("Textures/Background.jpg")) {
+        if (!backgroundTexture.loadFromFile("Textures/Background.jpg"))
+        {
             throw FileLoadException("Textures/Background.jpg");
         }
 
@@ -29,13 +31,12 @@ int main()
         sf::Vector2u windowSize = window.getSize();
         backgroundSprite.setScale(
             float(windowSize.x) / textureSize.x,
-            float(windowSize.y) / textureSize.y
-        );
+            float(windowSize.y) / textureSize.y);
 
         sf::Texture playerTexture;
-        if(!playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png"))
+        if (!playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png"))
             throw FileLoadException("Textures/Warrior_texture_pack_transparent-background.png");
-        Player player(&playerTexture, sf::Vector2u(7,4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
+        Player player(&playerTexture, sf::Vector2u(7, 4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
         Attack playerAttack(player, 2, 150.f, 10, 0.0f, 0.5f);
 
         sf::RectangleShape healthBar;
@@ -50,10 +51,10 @@ int main()
         healthBarOutline.setPosition(10.f, 10.f);
 
         sf::Texture dragonTexture;
-        if(!dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png"))
+        if (!dragonTexture.loadFromFile("Textures/Dragon_texture_pack_transparent_background.png"))
             throw FileLoadException("Textures/Dragon_texture_pack_transparent_background.png");
-        Monster dragon(&dragonTexture, sf::Vector2u(7,5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 200, 200, false);
-        MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f,0.f, 40.f, 30.f, 10.f, 10);
+        Monster dragon(&dragonTexture, sf::Vector2u(7, 5), .2f, 30.f, 1100.f, 400.f, 300.f, 150.f, 200, 200, false);
+        MonsterAttack dragonAttack(dragon, 2, 150.f, 150.f, 50.f, 0.7f, 0.f, 40.f, 30.f, 10.f, 10);
 
         sf::RectangleShape healthBarDragon;
         healthBarDragon.setSize(sf::Vector2f(200.f, 20.f));
@@ -67,10 +68,10 @@ int main()
         healthBarOutlineDragon.setPosition(1070.f, 10.f);
 
         sf::Texture meteoritTexture;
-        if(!meteoritTexture.loadFromFile("Textures/meteorit.png"))
+        if (!meteoritTexture.loadFromFile("Textures/meteorit.png"))
             throw FileLoadException("Textures/meteorit.png");
-        Meteorit* meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
-        std::vector<Meteorit*> meteorites;
+        Meteorit *meteorit = new Meteorit(&meteoritTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
+        std::vector<Meteorit *> meteorites;
 
         GameManager gameManager;
 
@@ -86,24 +87,24 @@ int main()
             {
                 switch (evnt.type)
                 {
-                    case sf::Event::Closed:
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+
+                case sf::Event::KeyPressed:
+                    if (evnt.key.code == sf::Keyboard::Escape)
                         window.close();
-                        break;
-                    
-                    case sf::Event::KeyPressed:
-                        if (evnt.key.code == sf::Keyboard::Escape)
-                            window.close();
-                        break;
-                    
-                    default:
-                        break;
+                    break;
+
+                default:
+                    break;
                 }
             }
 
             playerAttack.Update(deltaTime, dragon, healthBarDragon, meteorites);
             player.Update(deltaTime, playerAttack);
-            
-            dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f,50.f,10.f, healthBar);
+
+            dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f, 50.f, 10.f, healthBar);
 
             meteorit->spown(deltaTime, meteorites, gameManager);
 
@@ -117,30 +118,38 @@ int main()
 
             player.Draw(window);
             // playerAttack.Draw(window);
-            
+
             dragon.Draw(window, dragonAttack);
-            
+
             window.draw(healthBarOutline);
             window.draw(healthBar);
 
             window.draw(healthBarOutlineDragon);
             window.draw(healthBarDragon);
 
-            for (auto& meteorite : meteorites)
+            for (auto &meteorite : meteorites)
                 meteorite->draw(window);
 
             window.display();
         }
-    } catch (const FileLoadException& e) {
+    }
+    catch (const FileLoadException &e)
+    {
         std::cerr << e.what() << std::endl;
         return -1;
-    } catch (const InvalidEntityException& e) {
+    }
+    catch (const InvalidEntityException &e)
+    {
         std::cerr << e.what() << std::endl;
         return -1;
-    } catch (const StateException& e) {
+    }
+    catch (const StateException &e)
+    {
         std::cerr << e.what() << std::endl;
         return -1;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cerr << e.what() << std::endl;
         return -1;
     }

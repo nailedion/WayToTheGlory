@@ -14,6 +14,8 @@
                 "${workspaceFolder}/Monster.cpp",
                 "${workspaceFolder}/MonsterAttack.cpp",
                 "${workspaceFolder}/Meteorit.cpp",
+                "${workspaceFolder}/ExceptionTypes.cpp",
+                "${workspaceFolder}/GameManager.cpp",
                 "${file}",
                 "-I\"C:/Libraries/SFML-2.6.2-ucrt/include\"",
                 "-DSFML_STATIC",

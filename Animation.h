@@ -4,24 +4,24 @@
 
 class Animation
 {
-        sf::Vector2u imageCount;
-        sf::Vector2u currentImage;
+    sf::Vector2u imageCount;
+    sf::Vector2u currentImage;
 
-        float totalTime;
-        float switchTime;
+    float totalTime;
+    float switchTime;
 
-        sf::IntRect uvRect;
+    sf::IntRect uvRect;
 
-    public:
-        Animation(sf::Texture*, sf::Vector2u, float);
-        Animation(const Animation&);
-        ~Animation();
+public:
+    Animation(sf::Texture *, sf::Vector2u, float);
+    Animation(const Animation &);
+    ~Animation();
 
-        const sf::IntRect getUVRect() const;
-        const sf::Vector2u getImageCount() const { return imageCount; }
-        const sf::Vector2u getCurrentImage() const { return currentImage; }
+    const sf::IntRect getUVRect() const;
+    const sf::Vector2u getImageCount() const;
+    const sf::Vector2u getCurrentImage() const;
 
-        void setUVRect(const sf::IntRect&);
+    void setUVRect(const sf::IntRect &);
 
-        void Update(int, float, bool);
+    void Update(int, float, bool);
 };

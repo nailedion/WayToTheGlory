@@ -6,12 +6,11 @@
 
 #include <SFML/Graphics.hpp>
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth) :
-    Entity(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height, health, maxHealth)
+Player::Player(sf::Texture *texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth) : Entity(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height, health, maxHealth)
 {
 }
 
-Player::Player(Entity& entity) : Entity(entity)
+Player::Player(Entity &entity) : Entity(entity)
 {
 }
 
@@ -24,24 +23,35 @@ sf::Vector2f Player::getPosition() const
     return body.getPosition();
 }
 
-void Player::Update(float deltaTime, Attack& playerAttack)
+void Player::setHealth(float health, sf::RectangleShape &healthBar)
 {
-    if (health <= 0) //If the player is dead
+    if (health < 0.f)
+        this->health = 0.f;
+    else
+        this->health = health;
+    healthBar.setSize(sf::Vector2f(200.f * (float(this->health) / maxHealth), 20.f));
+}
+
+void Player::Update(float deltaTime, Attack &playerAttack)
+{
+    if (health <= 0) // If the player is dead
     {
-        row = 3; //Set the player to the dead animation
-        if(animation.getCurrentImage().x < animation.getImageCount().x - 1) //If the monster is not dead(last image of being dead) update the animation
+        row = 3;                                                             // Set the player to the dead animation
+        if (animation.getCurrentImage().x < animation.getImageCount().x - 1) // If the monster is not dead(last image of being dead) update the animation
             animation.Update(row, deltaTime, faceRight);
         body.setTextureRect(animation.getUVRect());
         return;
     }
 
-    if(playerAttack.getIsAttacking()){
-        animation.Update(row, deltaTime * playerAttack.getAttackSpeed()/speed, faceRight);
+    if (playerAttack.getIsAttacking())
+    {
+        animation.Update(row, deltaTime * playerAttack.getAttackSpeed() / speed, faceRight);
         return;
     }
 
-    if (body.getPosition().x < 0 || body.getPosition().x > 1280 || 
-        body.getPosition().y < 0 || body.getPosition().y > 800) {
+    if (body.getPosition().x < 0 || body.getPosition().x > 1280 ||
+        body.getPosition().y < 0 || body.getPosition().y > 800)
+    {
         throw StateException("Player has moved out of bounds!");
     }
 
@@ -57,7 +67,7 @@ void Player::Update(float deltaTime, Attack& playerAttack)
         movement.x += speed * deltaTime;
 
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        if(movement.x == 0.f && movement.y == 0.f)
+        if (movement.x == 0.f && movement.y == 0.f)
         {
             row = 0;
         }
@@ -70,16 +80,25 @@ void Player::Update(float deltaTime, Attack& playerAttack)
                 faceRight = false;
         }
     else if (movement.x > 0.f)
-            faceRight = true;
-        else if (movement.x < 0.f)
-            faceRight = false;
+        faceRight = true;
+    else if (movement.x < 0.f)
+        faceRight = false;
 
     animation.Update(row, deltaTime, faceRight);
     body.setTextureRect(animation.getUVRect());
     body.move(movement);
 }
 
-void Player::Draw(sf::RenderWindow& window)
+void Player::Draw(sf::RenderWindow &window)
 {
     window.draw(body);
+}
+
+bool Player::getIsAlive() const
+{
+    return this->getHealth() > 0;
+}
+void Player::update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon)
+{
+    // Player-specific update logic can be added here if needed
 }

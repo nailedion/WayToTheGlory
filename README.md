@@ -71,8 +71,8 @@
 
 1. **Clone the Repository**:
    ```terminal Linux/Windows/MAC
-   -git clone https://github.com/<your-username>/WayToTheGlory.git
-   -cd WayToTheGlory
+   git clone https://github.com/<your-username>/WayToTheGlory.git
+   cd WayToTheGlory
 
 2. **Install Dependencies**
     -Ensure you have SFML(2.6.2) installed.
@@ -88,12 +88,13 @@
 ## **File Structure**
 
 WayToTheGlory/
+```
 ├── Animation.cpp/.h         # Handles sprite animations
 ├── Attack.cpp/.h            # Player attack logic
 ├── Entity.cpp/.h            # Base class for all entities
 ├── ExceptionTypes.cpp/.h    # Custom exception classes
 ├── GameManager.cpp/.h       # Manages meteorites and game logic
-├── [main.cpp](http://_vscodecontentref_/0)                 # Main game loop
+├── main.cpp                 # Main game loop
 ├── Meteorite.cpp/.h         # Meteorite logic
 ├── Monster.cpp/.h           # Dragon (monster) logic
 ├── MonsterAttack.cpp/.h     # Dragon's attack logic
@@ -101,6 +102,7 @@ WayToTheGlory/
 ├── Textures/                # Game textures (e.g., dragon, player, meteorite)
 ├── Fonts/                   # Fonts used in the game
 └── .vscode/                 # VSCode configuration files
+```
 
 ## **Credits**
  - Developer: Bâcă Ionuț-Adelin

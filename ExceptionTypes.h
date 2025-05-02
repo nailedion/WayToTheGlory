@@ -9,7 +9,7 @@ protected:
     std::string message;
 
 public:
-    explicit GameException(const std::string &msg) : message(msg) {}
+    explicit GameException(const std::string &);
 
     virtual const char *what() const noexcept override;
 };
@@ -17,20 +17,17 @@ public:
 class FileLoadException : public GameException
 {
 public:
-    explicit FileLoadException(const std::string &filename)
-        : GameException("Failed to load file: " + filename) {}
+    explicit FileLoadException(const std::string &);
 };
 
 class InvalidEntityException : public GameException
 {
 public:
-    explicit InvalidEntityException(const std::string &entityName)
-        : GameException("Invalid entity: " + entityName) {}
+    explicit InvalidEntityException(const std::string &);
 };
 
 class StateException : public GameException
 {
 public:
-    explicit StateException(const std::string &stateError)
-        : GameException("State error: " + stateError) {}
+    explicit StateException(const std::string &);
 };

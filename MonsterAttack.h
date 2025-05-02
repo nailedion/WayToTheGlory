@@ -32,7 +32,7 @@ public:
     const unsigned int getDamage() const;
     const float getAttackTime() const;
 
-    void setTotalTime(float totalTime);
+    void setTotalTime(float);
 
     void Update(float, Player &, sf::RectangleShape &);
     void Draw(sf::RenderWindow &, Monster &);

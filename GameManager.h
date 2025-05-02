@@ -10,16 +10,16 @@ protected:
     std::vector<Entity *> meteorites;
 
 public:
-    void operator=(GameManager &other);
-    friend void swap(GameManager &first, GameManager &second);
+    void operator=(GameManager &);
+    friend void swap(GameManager &first, GameManager &);
 
     GameManager() = default;
-    GameManager(const GameManager &other);
+    GameManager(const GameManager &);
     ~GameManager();
 
-    void addMeteorite(Entity *meteorite);
+    void addMeteorite(Entity *);
 
-    void removeMeteorite(Entity *meteorite);
+    void removeMeteorite(Entity *);
 
-    void updateMeteorites(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon);
+    void updateMeteorites(float, Monster &, sf::RectangleShape &);
 };

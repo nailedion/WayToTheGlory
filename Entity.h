@@ -29,14 +29,14 @@ public:
     const unsigned int getHealth() const;
     const unsigned int getMaxHealth() const;
 
-    void setRow(const unsigned int ROW);
-    void setFaceRight(const bool faceRight);
-    void setPosition(float x, float y);
+    void setRow(const unsigned int);
+    void setFaceRight(const bool);
+    void setPosition(float, float);
 
     Entity &operator=(Entity &);
 
     virtual bool getIsAlive() const = 0;
-    virtual void update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon) = 0;
+    virtual void update(float, Monster &, sf::RectangleShape &) = 0;
 
-    friend void swap(Entity &first, Entity &second);
+    friend void swap(Entity &, Entity &);
 };

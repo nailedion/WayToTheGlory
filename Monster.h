@@ -23,8 +23,8 @@ public:
     const Animation &getAnimation() const;
     const float getHealth() const;
 
-    void setIsAttacking(bool isAttacking);
-    void setHealth(float health, sf::RectangleShape &healthBar);
+    void setIsAttacking(bool);
+    void setHealth(float, sf::RectangleShape &);
 
     void Update(float, Player &, MonsterAttack &, float, float, float, float, sf::RectangleShape &);
     void Draw(sf::RenderWindow &, MonsterAttack &);
@@ -32,5 +32,5 @@ public:
     Entity *clone() const override;
 
     virtual bool getIsAlive() const override;
-    virtual void update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon) override;
+    virtual void update(float, Monster &, sf::RectangleShape &) override;
 };

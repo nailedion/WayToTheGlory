@@ -130,8 +130,74 @@ int main()
             for (auto &meteorite : meteorites)
                 meteorite->draw(window);
 
+            if(dragon.getHealth() <= 0.f || player.getHealth() <= 0.f)
+                break;
+
             window.display();
         }
+
+        if(dragon.getHealth() <= 0.f)
+        {
+            sf::Font font;
+            // if (!font.loadFromFile("Fonts/arial.ttf"))
+            // {
+            //     std::cerr << "Failed to load font!" << std::endl;
+            //     return -1;
+            // }
+
+            // sf::Text victoryText;
+            // victoryText.setFont(font);
+            // victoryText.setString("You have defeated the dragon!");
+            // victoryText.setCharacterSize(50);
+            // victoryText.setFillColor(sf::Color::White);
+            // victoryText.setStyle(sf::Text::Bold);
+            // victoryText.setPosition(400.f, 350.f);
+
+            // while (window.isOpen())
+            // {
+            //     sf::Event evnt;
+            //     while (window.pollEvent(evnt))
+            //     {
+            //     if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            //         window.close();
+            //     }
+
+            //     window.clear();
+            //     window.draw(victoryText);
+            //     window.display();
+            // }
+        }
+        // else if(player.getHealth() <= 0.f)
+        // {
+        //     sf::Font font;
+        //     if (!font.loadFromFile("Fonts/arial.ttf"))
+        //     {
+        //         std::cerr << "Failed to load font!" << std::endl;
+        //         return -1;
+        //     }
+
+        //     sf::Text defeatText;
+        //     defeatText.setFont(font);
+        //     defeatText.setString("You have been defeated by the dragon!");
+        //     defeatText.setCharacterSize(50);
+        //     defeatText.setFillColor(sf::Color::Red);
+        //     defeatText.setStyle(sf::Text::Bold);
+        //     defeatText.setPosition(400.f, 350.f);
+
+        //     while (window.isOpen())
+        //     {
+        //         sf::Event evnt;
+        //         while (window.pollEvent(evnt))
+        //         {
+        //         if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        //             window.close();
+        //         }
+
+        //         window.clear();
+        //         window.draw(defeatText);
+        //         window.display();
+        //     }
+        // }
     }
     catch (const FileLoadException &e)
     {

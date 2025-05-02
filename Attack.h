@@ -29,6 +29,6 @@ public:
     bool getIsAttacking() const;
     float getAttackSpeed() const;
 
-    bool Update(float deltaTime, Monster &, sf::RectangleShape &, std::vector<Meteorite *> &);
-    void Draw(sf::RenderWindow &window);
+    bool Update(float, Monster &, sf::RectangleShape &, std::vector<Meteorite *> &);
+    void Draw(sf::RenderWindow &);
 };

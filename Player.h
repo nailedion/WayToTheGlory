@@ -16,9 +16,9 @@ public:
 
     sf::Vector2f getPosition() const;
 
-    void setHealth(float health, sf::RectangleShape &healthBar);
+    void setHealth(float, sf::RectangleShape &);
 
-    void Update(float deltaTime, Attack &);
+    void Update(float, Attack &);
     void Draw(sf::RenderWindow &);
     bool isMoving() const;
 
@@ -28,5 +28,5 @@ public:
     }
 
     virtual bool getIsAlive() const override;
-    virtual void update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon) override;
+    virtual void update(float, Monster &, sf::RectangleShape &) override;
 };

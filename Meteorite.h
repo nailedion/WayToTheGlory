@@ -24,15 +24,15 @@ public:
 
     virtual bool getIsAlive() const;
 
-    void takeDamage(float damage);
+    void takeDamage(float);
 
-    virtual void update(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon);
+    virtual void update(float, Monster &, sf::RectangleShape &);
 
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &);
 
-    void spown(float deltaTime, std::vector<Meteorite *> &meteorites, GameManager &gameManager);
+    void spown(float , std::vector<Meteorite *> &, GameManager &);
 
     virtual Entity *clone() const override;
 
-    void killIfCollides(Monster &dragon);
+    void killIfCollides(Monster &);
 };

@@ -6,16 +6,18 @@
 
 class GameManager
 {
-protected:
     std::vector<Entity *> meteorites;
+    
+    GameManager() = default;
 
 public:
     void operator=(GameManager &);
     friend void swap(GameManager &first, GameManager &);
 
-    GameManager() = default;
     GameManager(const GameManager &);
     ~GameManager();
+
+    static GameManager& getGameManager();
 
     void addMeteorite(Entity *);
 

@@ -10,6 +10,12 @@ void GameManager::operator=(GameManager &other)
     }
 }
 
+GameManager& GameManager::getGameManager()
+{
+    static GameManager instance;
+    return instance;
+}
+
 void swap(GameManager &first, GameManager &second)
 {
     std::swap(first.meteorites, second.meteorites);

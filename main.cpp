@@ -73,7 +73,7 @@ int main()
         Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
         std::vector<Meteorite *> meteorites;
 
-        GameManager gameManager;
+        GameManager gameManager = GameManager::getGameManager();
 
         float deltaTime = 0.f;
         sf::Clock clock;

@@ -8,11 +8,13 @@
 
 class Player : public Entity
 {
+    Player(sf::Texture *, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int);
 
 public:
-    Player(sf::Texture *, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int);
     Player(Entity &);
     ~Player();
+
+    static Player& getPlayer(sf::Texture *, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int);
 
     sf::Vector2f getPosition() const;
 

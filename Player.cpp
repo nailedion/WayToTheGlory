@@ -18,6 +18,12 @@ Player::~Player()
 {
 }
 
+Player& Player::getPlayer(sf::Texture * texture, sf::Vector2u imageCount, float switchTime, float speed, float xPosition, float yPosition, float width, float height, unsigned int health, unsigned int maxHealth)
+{
+    static Player instance(texture, imageCount, switchTime, speed, xPosition, yPosition, width, height, health, maxHealth);
+    return instance;
+}
+
 sf::Vector2f Player::getPosition() const
 {
     return body.getPosition();

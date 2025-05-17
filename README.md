@@ -135,5 +135,5 @@ Enjoy the game and good luck defeating the dragon! 🐉
 
 ## **Tasks for the third project**
 ```
-  -I've made the GameManager a singleton class.
+  -I've made GameManager and Player singleton classes.
 ```

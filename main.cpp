@@ -36,7 +36,7 @@ int main()
         sf::Texture playerTexture;
         if (!playerTexture.loadFromFile("Textures/Warrior_texture_pack_transparent-background.png"))
             throw FileLoadException("Textures/Warrior_texture_pack_transparent-background.png");
-        Player player(&playerTexture, sf::Vector2u(7, 4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
+        Player player = Player::getPlayer(&playerTexture, sf::Vector2u(7, 4), 0.1f, 100.f, 200.f, 400.f, 100.f, 65.f, 100, 100);
         Attack playerAttack(player, 2, 150.f, 10, 0.0f, 0.5f);
 
         sf::RectangleShape healthBar;

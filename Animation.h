@@ -15,7 +15,7 @@ class Animation
 public:
     Animation(sf::Texture *, sf::Vector2u, float);
     Animation(const Animation &);
-    ~Animation();
+    virtual ~Animation();
 
     const sf::IntRect getUVRect() const;
     const sf::Vector2u getImageCount() const;

@@ -21,7 +21,7 @@ public:
     Entity(sf::Texture *, sf::Vector2u, float, float, float, float, float, float, unsigned int, unsigned int);
     Entity(const Entity &);
     virtual Entity *clone() const = 0;
-    ~Entity();
+    virtual ~Entity();
 
     bool getFaceRight() const;
     virtual const sf::RectangleShape &getBody() const;

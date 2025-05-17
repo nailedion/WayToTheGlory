@@ -10,6 +10,7 @@ protected:
 
 public:
     explicit GameException(const std::string &);
+    virtual ~GameException()=default;
 
     virtual const char *what() const noexcept override;
 };

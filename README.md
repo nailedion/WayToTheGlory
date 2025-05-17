@@ -122,3 +122,11 @@ WayToTheGlory/
     -Every 60 seconds, meteorites appear. Each meteorite heals the dragon by 5 HP every 10 seconds.
 
 Enjoy the game and good luck defeating the dragon! 🐉
+
+## **Tasks for the project**
+  -The Player, Monster, and Meteorite classes are derived from the Entity base class.
+  -The update virtual function, defined in the Meteorite class and specific to the theme, is invoked through a pointer to the base class.
+  -In the Meteorite class we find a virtual constructor.
+  -In the Player's constructor we find the call of the Entity's constructor.
+  -Entity has operator overloading = and dynamic cast in the Meteorite class.
+  -The FileLoadException, InvalidEntityException, StateException exceptions from GameException.

@@ -9,6 +9,7 @@
 #include <vector>
 
 class Monster;
+template <typename T>
 class GameManager; // Forward declaration of GameManager class
 
 class Meteorite : public Entity
@@ -30,7 +31,7 @@ public:
 
     void draw(sf::RenderWindow &);
 
-    void spown(float , std::vector<Meteorite *> &, GameManager &);
+    void spown(float, std::vector<Meteorite *> &, GameManager<Meteorite> &);
 
     virtual Entity *clone() const override;
 

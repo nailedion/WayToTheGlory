@@ -48,7 +48,7 @@ void Meteorite::draw(sf::RenderWindow &window)
     }
 }
 
-void Meteorite::spown(float deltaTime, std::vector<Meteorite *> &meteorites, GameManager &gameManager)
+void Meteorite::spown(float deltaTime, std::vector<Meteorite *> &meteorites, GameManager<Meteorite> &gameManager)
 {
     spownTimer += deltaTime;
     if (spownTimer >= spownTime)

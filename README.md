@@ -136,4 +136,5 @@ Enjoy the game and good luck defeating the dragon! 🐉
 ## **Tasks for the third project**
 ```
   -I've made GameManager and Player singleton classes.
+  -I’ve made GameManager a template class. Now, if needed, it can be used for other entities as well (with slight modifications to the function names [Update/update with uppercase/lowercase] and possibly a few [pure] virtual functions, but I don’t need to do that right now).
 ```

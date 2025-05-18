@@ -1,7 +1,6 @@
 #include "GameManager.h"
 #include "Meteorite.h"
 #include "Monster.h"
-#include <algorithm> // pentru std::remove și std::swap
 
 template <typename T>
 void GameManager<T>::operator=(GameManager<T> &other)

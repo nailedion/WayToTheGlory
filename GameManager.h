@@ -15,7 +15,10 @@ class GameManager
 
 public:
     void operator=(GameManager &);
-    friend void swap(GameManager &first, GameManager &);
+
+    template <typename U>
+    friend void swap(GameManager<U> &first, GameManager<U> &second);
+
 
     GameManager(const GameManager &);
     ~GameManager();
@@ -29,4 +32,5 @@ public:
     void updateMeteorites(float, Monster &, sf::RectangleShape &);
 };
 
+// #include "GameManager.cpp"  // Not recommended to include .cpp files in header files bc it will be compiled multiple times. But I'll let it here for demonstration purposes. If you want to use it, just uncomment this line and the task line for GameManager.cpp..
 #include "GameManager.tpp"

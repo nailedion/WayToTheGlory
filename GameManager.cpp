@@ -2,34 +2,39 @@
 #include "Meteorite.h"
 #include "Monster.h"
 
-void GameManager::operator=(GameManager &other)
+template <typename T>
+void GameManager<T>::operator=(GameManager<T> &other)
 {
     if (this != &other)
     {
-        swap(meteorites, other.meteorites);
+        swap(*this, other);
     }
 }
 
-GameManager& GameManager::getGameManager()
+template <typename T>
+GameManager<T>& GameManager<T>::getGameManager()
 {
-    static GameManager instance;
+    static GameManager<T> instance;
     return instance;
 }
 
-void swap(GameManager &first, GameManager &second)
+template <typename T>
+void swap(GameManager<T> &first, GameManager<T> &second)
 {
     std::swap(first.meteorites, second.meteorites);
 }
 
-GameManager::GameManager(const GameManager &other)
+template <typename T>
+GameManager<T>::GameManager(const GameManager<T> &other)
 {
     for (const auto &meteorite : other.meteorites)
     {
-        meteorites.push_back(meteorite->clone()); // Assuming clone() creates a deep copy
+        meteorites.push_back(meteorite->clone()); // presupunem că clone() face deep copy
     }
 }
 
-GameManager::~GameManager()
+template <typename T>
+GameManager<T>::~GameManager()
 {
     for (auto &meteorite : meteorites)
     {
@@ -37,12 +42,14 @@ GameManager::~GameManager()
     }
 }
 
-void GameManager::addMeteorite(Entity *meteorite)
+template <typename T>
+void GameManager<T>::addMeteorite(T *meteorite)
 {
     meteorites.push_back(meteorite);
 }
 
-void GameManager::removeMeteorite(Entity *meteorite)
+template <typename T>
+void GameManager<T>::removeMeteorite(T *meteorite)
 {
     auto it = std::remove(meteorites.begin(), meteorites.end(), meteorite);
     if (it != meteorites.end())
@@ -52,7 +59,8 @@ void GameManager::removeMeteorite(Entity *meteorite)
     }
 }
 
-void GameManager::updateMeteorites(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon)
+template <typename T>
+void GameManager<T>::updateMeteorites(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon)
 {
     for (auto &meteorite : meteorites)
     {
@@ -67,3 +75,5 @@ void GameManager::updateMeteorites(float deltaTime, Monster &dragon, sf::Rectang
         }
     }
 }
+
+template class GameManager<Entity>;

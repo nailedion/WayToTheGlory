@@ -16,6 +16,7 @@
         "${workspaceFolder}/MonsterAttack.cpp",
         "${workspaceFolder}/Meteorite.cpp",
         "${workspaceFolder}/ExceptionTypes.cpp",
+        // "${workspaceFolder}/GameManager.cpp",
         "${file}",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe",

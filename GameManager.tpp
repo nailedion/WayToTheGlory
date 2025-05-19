@@ -3,7 +3,7 @@
 #include "Monster.h"
 
 template <typename T>
-void GameManager<T>::operator=(GameManager<T> &other)
+void GameManager<T>::operator=(GameManager<T> &other) // usless
 {
     if (this != &other)
     {
@@ -12,7 +12,7 @@ void GameManager<T>::operator=(GameManager<T> &other)
 }
 
 template <typename T>
-GameManager<T>& GameManager<T>::getGameManager()
+GameManager<T> &GameManager<T>::getGameManager()
 {
     static GameManager<T> instance;
     return instance;

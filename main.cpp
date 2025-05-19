@@ -13,6 +13,23 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
+template <typename ptrVector, typename lambdaFunction>
+void removeIfPtr(ptrVector &vec, lambdaFunction condition)
+{
+    for (auto it = vec.begin(); it != vec.end();)
+    {
+        if (condition(*it))
+        {
+            delete *it;
+            it = vec.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
 int main()
 {
     try
@@ -108,11 +125,14 @@ int main()
 
             meteorite->spown(deltaTime, meteorites, gameManager);
 
-            gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
+            gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon); // for (int i = 0; i < meteorites.size(); ++i)
+            //     if (meteorites[i]->getHealth() <= 0.f)
+            //         meteorites.eras
 
-            for (int i = 0; i < meteorites.size(); ++i)
-                if (meteorites[i]->getHealth() <= 0.f)
-                    meteorites.erase(meteorites.begin() + i);
+            e(meteorites.begin() + i);
+
+            removeIfPtr(meteorites, [](Meteorite *m)
+                        { return m->getHealth() <= 0.f; });
 
             window.draw(backgroundSprite);
 
@@ -130,13 +150,13 @@ int main()
             for (auto &meteorite : meteorites)
                 meteorite->draw(window);
 
-            if(dragon.getHealth() <= 0.f || player.getHealth() <= 0.f)
+            if (dragon.getHealth() <= 0.f || player.getHealth() <= 0.f)
                 break;
 
             window.display();
         }
 
-        if(dragon.getHealth() <= 0.f)
+        if (dragon.getHealth() <= 0.f)
         {
             sf::Font font;
             if (!font.loadFromFile("Fonts/arial.ttf"))
@@ -158,8 +178,8 @@ int main()
                 sf::Event evnt;
                 while (window.pollEvent(evnt))
                 {
-                if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                    window.close();
+                    if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                        window.close();
                 }
 
                 window.clear();
@@ -167,7 +187,7 @@ int main()
                 window.display();
             }
         }
-        else if(player.getHealth() <= 0.f)
+        else if (player.getHealth() <= 0.f)
         {
             sf::Font font;
             if (!font.loadFromFile("Fonts/arial.ttf"))
@@ -189,8 +209,8 @@ int main()
                 sf::Event evnt;
                 while (window.pollEvent(evnt))
                 {
-                if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                    window.close();
+                    if (evnt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                        window.close();
                 }
 
                 window.clear();

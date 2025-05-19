@@ -137,4 +137,5 @@ Enjoy the game and good luck defeating the dragon! 🐉
 ```
   -I've made GameManager and Player singleton classes.
   -I’ve made GameManager a template class. Now, if needed, it can be used for other entities as well (with slight modifications to the function names [Update/update with uppercase/lowercase] and possibly a few [pure] virtual functions, but I don’t need to do that right now).
+  -Implemented the removeIfPtr template function to verify if the meteorites are alive. If they aren't(checked by the lambda function) it will remove them from the vector.
 ```

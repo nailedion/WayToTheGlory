@@ -87,7 +87,7 @@ int main()
         sf::Texture meteoriteTexture;
         if (!meteoriteTexture.loadFromFile("Textures/Meteorite.png"))
             throw FileLoadException("Textures/Meteorite.png");
-        Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
+        Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 1.f, 0.f);
         std::vector<Meteorite *> meteorites;
 
         GameManager<Meteorite> &gameManager = GameManager<Meteorite>::getGameManager();
@@ -127,9 +127,7 @@ int main()
 
             gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon); // for (int i = 0; i < meteorites.size(); ++i)
             //     if (meteorites[i]->getHealth() <= 0.f)
-            //         meteorites.eras
-
-            e(meteorites.begin() + i);
+            //         meteorites.erase(meteorites.begin() + i);
 
             removeIfPtr(meteorites, [](Meteorite *m)
                         { return m->getHealth() <= 0.f; });

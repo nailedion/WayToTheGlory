@@ -78,8 +78,9 @@
   ```
 
 2. **Install Dependencies**  
-  - Ensure you have SFML (2.6.2) installed.  
-  - Use the UCRT64 version of MinGW if you're on Windows.
+  - Ensure you have SFML (2.6.2) installed: https://www.sfml-dev.org/download/sfml/2.6.2/
+  - Choose the Visual GCC 13.1.0 MinGW (SEH) - 64-bit version or the one compatible with your compiler.
+  - Use the UCRT64 version of MinGW if you're on Windows: https://www.msys2.org/
 
 3. **Build the Game**  
   - Use the provided `tasks.json` in Visual Studio Code to build the project.  
@@ -92,8 +93,8 @@
   - On Windows:  
     ```sh
     .\WayToTheGlory.exe
-    ```
     or double-click the executable file.
+    ```
 
 ## **File Structure**
 

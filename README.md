@@ -71,7 +71,7 @@
 
 1. **Clone the Repository**:
    ```terminal Linux/Windows/MAC
-   git clone https://github.com/<your-username>/WayToTheGlory.git
+   git clone https://github.com/nailedion/WayToTheGlory.git
    cd WayToTheGlory
 
 2. **Install Dependencies**
@@ -80,6 +80,7 @@
 
 3. **Build the game**
     -Use the provided task.json in Visual Studio Code to build the project.
+    OR USE THE COMMAND: g++ -std=c++17 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/SFML -LC:/msys64/mingw64/lib *.cpp -lsfml-graphics -lsfml-window -lsfml-system -o WayToTheGlory.exe
 
 4. **Run the game**
  1) ./WayToTheGlory.exe

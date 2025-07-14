@@ -78,7 +78,7 @@
     -Ensure you have SFML(2.6.2) installed.
     -Use the UCRT64 version of MinGW if you're on Windows.
 
-3. **Build the game**
+3. **Build the game(it's compiled but if it doesn't work try by yourself)**
     -Use the provided task.json in Visual Studio Code to build the project.
     OR USE THE COMMAND: g++ -std=c++17 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/SFML -LC:/msys64/mingw64/lib *.cpp -lsfml-graphics -lsfml-window -lsfml-system -o WayToTheGlory.exe
 

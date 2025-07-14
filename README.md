@@ -85,7 +85,7 @@
 4. **Run the game**
  1) ./WayToTheGlory.exe
  2) Double click on the executable file.
-```
+    ```
 
 ## **File Structure**
 

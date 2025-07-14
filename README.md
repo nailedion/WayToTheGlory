@@ -69,23 +69,31 @@
 
 ## **Installation**
 
-1. **Clone the Repository**:
-   ```terminal Linux/Windows/MAC
-   git clone https://github.com/nailedion/WayToTheGlory.git
-   cd WayToTheGlory
+## **Installation**
 
-2. **Install Dependencies**
-    -Ensure you have SFML(2.6.2) installed.
-    -Use the UCRT64 version of MinGW if you're on Windows.
+1. **Clone the Repository**  
+  ```sh
+  git clone https://github.com/nailedion/WayToTheGlory.git
+  cd WayToTheGlory
+  ```
 
-3. **Build the game(it's compiled but if it doesn't work try by yourself)**
-    -Use the provided task.json in Visual Studio Code to build the project.
-    -OR USE THE COMMAND: g++ -std=c++17 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/SFML -LC:/msys64/mingw64/lib *.cpp -lsfml-graphics -lsfml-window -lsfml-system -o WayToTheGlory.exe
+2. **Install Dependencies**  
+  - Ensure you have SFML (2.6.2) installed.  
+  - Use the UCRT64 version of MinGW if you're on Windows.
 
-4. **Run the game**
- 1) ./WayToTheGlory.exe
- 2) Double click on the executable file.
+3. **Build the Game**  
+  - Use the provided `tasks.json` in Visual Studio Code to build the project.  
+  - **Or build manually:**  
+    ```sh
+    g++ -std=c++17 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/SFML -LC:/msys64/mingw64/lib *.cpp -lsfml-graphics -lsfml-window -lsfml-system -o WayToTheGlory.exe
     ```
+
+4. **Run the Game**  
+  - On Windows:  
+    ```sh
+    .\WayToTheGlory.exe
+    ```
+    or double-click the executable file.
 
 ## **File Structure**
 

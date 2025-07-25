@@ -49,17 +49,6 @@ void GameManager<T>::addMeteorite(T *meteorite)
 }
 
 template <typename T>
-void GameManager<T>::removeMeteorite(T *meteorite)
-{
-    auto it = std::remove(meteorites.begin(), meteorites.end(), meteorite);
-    if (it != meteorites.end())
-    {
-        delete *it;
-        meteorites.erase(it, meteorites.end());
-    }
-}
-
-template <typename T>
 void GameManager<T>::updateMeteorites(float deltaTime, Monster &dragon, sf::RectangleShape &healthBarDragon)
 {
     for (auto &meteorite : meteorites)
@@ -69,9 +58,11 @@ void GameManager<T>::updateMeteorites(float deltaTime, Monster &dragon, sf::Rect
             meteorite->update(deltaTime, dragon, healthBarDragon);
         }
 
-        if (Meteorite *castedMeteorite = dynamic_cast<Meteorite *>(meteorite))
+        if (Meteorite* castedMeteorite = dynamic_cast<Meteorite*>(meteorite))
         {
             castedMeteorite->killIfCollides(dragon);
         }
     }
+    
+    removeIfPtr(meteorites, [](T* m) { return !m->getIsAlive(); });
 }

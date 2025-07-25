@@ -48,7 +48,7 @@ void Meteorite::draw(sf::RenderWindow &window)
     }
 }
 
-void Meteorite::spown(float deltaTime, std::vector<Meteorite *> &meteorites, GameManager<Meteorite> &gameManager)
+void Meteorite::spown(float deltaTime, GameManager<Meteorite> &gameManager)
 {
     spownTimer += deltaTime;
     if (spownTimer >= spownTime)
@@ -60,10 +60,9 @@ void Meteorite::spown(float deltaTime, std::vector<Meteorite *> &meteorites, Gam
             Meteorite *meteorite = static_cast<Meteorite *>(this->clone());
 
             unsigned int x = 15 + rand() % (1265 - 15 + 1), y = 25 + rand() % (775 - 25 + 1);
-            body.setPosition(x, y);
+            meteorite->setPosition(x, y);
 
-            meteorites.push_back(meteorite);
-            gameManager.addMeteorite(meteorite); // Add the new meteorite to the game manager
+            gameManager.addMeteorite(meteorite);
         }
     }
 }

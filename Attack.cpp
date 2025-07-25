@@ -8,7 +8,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-// class Monster; // Forward declaration of Monster class
+// class Monster;
 
 Attack::Attack(Entity &entity, unsigned int ROW, float speed, unsigned int damage = 0, float attackTime = 0.f, float totalTime = 0.f) : entity(&entity), ROW(ROW), attackSpeed(speed), isAttacking(false), damage(damage), attackTime(attackTime), totalTime(totalTime)
 {

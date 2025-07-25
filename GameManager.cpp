@@ -29,7 +29,7 @@ GameManager<T>::GameManager(const GameManager<T> &other)
 {
     for (const auto &meteorite : other.meteorites)
     {
-        meteorites.push_back(meteorite->clone()); // presupunem că clone() face deep copy
+        meteorites.push_back(meteorite->clone());
     }
 }
 

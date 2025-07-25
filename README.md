@@ -69,13 +69,13 @@
 
 ## **Installation**
 
-## **Installation**
-
 1. **Clone the Repository**  
   ```sh
   git clone https://github.com/nailedion/WayToTheGlory.git
   cd WayToTheGlory
   ```
+
+1,5. **Try to run the game(4): if it doesn't work go to the next step(2)**  
 
 2. **Install Dependencies**  
   - Ensure you have SFML (2.6.2) installed: https://www.sfml-dev.org/download/sfml/2.6.2/
@@ -86,7 +86,7 @@
   - Use the provided `tasks.json` in Visual Studio Code to build the project.  
   - **Or build manually:**  
     ```sh
-    g++ -std=c++17 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/SFML -LC:/msys64/mingw64/lib *.cpp -lsfml-graphics -lsfml-window -lsfml-system -o WayToTheGlory.exe
+    g++ -fdiagnostics-color=always -g Animation.cpp Entity.cpp Player.cpp Attack.cpp Monster.cpp MonsterAttack.cpp Meteorite.cpp ExceptionTypes.cpp main.cpp -o WayToTheGlory.exe -lsfml-graphics -lsfml-window -lsfml-system
     ```
 
 4. **Run the Game**  

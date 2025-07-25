@@ -13,10 +13,10 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-template <typename ptrVector, typename lambdaFunction>
-void removeIfPtr(ptrVector &vec, lambdaFunction condition)
+template <typename PtrVector, typename Lambda>
+void removeIfPtr(PtrVector& vec, Lambda condition)
 {
-    for (auto it = vec.begin(); it != vec.end();)
+    for (auto it = vec.begin(); it != vec.end(); )
     {
         if (condition(*it))
         {
@@ -87,8 +87,7 @@ int main()
         sf::Texture meteoriteTexture;
         if (!meteoriteTexture.loadFromFile("Textures/Meteorite.png"))
             throw FileLoadException("Textures/Meteorite.png");
-        Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 1.f, 0.f);
-        std::vector<Meteorite *> meteorites;
+        Meteorite *meteorite = new Meteorite(&meteoriteTexture, sf::Vector2u(1, 1), 0.1f, 100.f, 200.f, 400.f, 30.f, 50.f, 30, 30, 5.f, 0.f, 60.f, 0.f);
 
         GameManager<Meteorite> &gameManager = GameManager<Meteorite>::getGameManager();
 
@@ -118,24 +117,18 @@ int main()
                 }
             }
 
-            playerAttack.Update(deltaTime, dragon, healthBarDragon, meteorites);
+            playerAttack.Update(deltaTime, dragon, healthBarDragon, gameManager.getMeteorites());
             player.Update(deltaTime, playerAttack);
 
             dragon.Update(deltaTime, player, dragonAttack, 100.f, 90.f, 50.f, 10.f, healthBar);
 
-            meteorite->spown(deltaTime, meteorites, gameManager);
+            meteorite->spown(deltaTime, gameManager);
 
-            gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon); // for (int i = 0; i < meteorites.size(); ++i)
-            //     if (meteorites[i]->getHealth() <= 0.f)
-            //         meteorites.erase(meteorites.begin() + i);
-
-            removeIfPtr(meteorites, [](Meteorite *m)
-                        { return m->getHealth() <= 0.f; });
+            gameManager.updateMeteorites(deltaTime, dragon, healthBarDragon);
 
             window.draw(backgroundSprite);
 
             player.Draw(window);
-            // playerAttack.Draw(window);
 
             dragon.Draw(window, dragonAttack);
 
@@ -145,7 +138,7 @@ int main()
             window.draw(healthBarOutlineDragon);
             window.draw(healthBarDragon);
 
-            for (auto &meteorite : meteorites)
+            for (auto &meteorite : gameManager.getMeteorites())
                 meteorite->draw(window);
 
             if (dragon.getHealth() <= 0.f || player.getHealth() <= 0.f)

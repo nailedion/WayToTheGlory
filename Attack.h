@@ -8,7 +8,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-class Monster; // Forward declaration of Monster class
+class Monster;
 
 class Attack
 {

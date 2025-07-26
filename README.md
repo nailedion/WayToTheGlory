@@ -125,8 +125,7 @@ WayToTheGlory/
                             The meteorites are the lvl 35 metins.
 
 ## **Tips**
-    If you've made it this far, you must be a geek 🤓 like me. Want some tips?
-    -The dragon has a shorter attack range on its right side, so try attacking from there.
+    If you've made it this far, you must be a geek 🤓. Want some tips?
     -If the dragon collides with meteorites, it will destroy them.
     -The game warns you not to reach 0 HP — if the dragon has low HP, you can afford to lose some, but be careful.
     -You have 100 HP, the dragon has 500 HP, and you both deal 10 damage per hit.

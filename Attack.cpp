@@ -43,7 +43,8 @@ bool Attack::Update(float deltaTime, Monster &dragon, sf::RectangleShape &health
         if (attackTime >= totalTime)
         {
             // if(dragon.getBody().getGlobalBounds().intersects(attackBody.getGlobalBounds()))
-            if (abs(dragon.getBody().getPosition().x - attackBody.getPosition().x) < 110.f && abs(dragon.getBody().getPosition().y - attackBody.getPosition().y) < 25.f)
+            // if (abs(dragon.getBody().getPosition().x - attackBody.getPosition().x) < 110.f && abs(dragon.getBody().getPosition().y - attackBody.getPosition().y) < 25.f)
+            if (dragon.getBody().getPosition().x - attackBody.getPosition().x < 130.f && dragon.getBody().getPosition().x - attackBody.getPosition().x > -90.f && abs(dragon.getBody().getPosition().y - attackBody.getPosition().y) < 25.f)
             {
                 // std::cout << "Collision detected!" << std::endl;
                 dragon.setHealth(dragon.getHealth() - damage, healthBarDragon); // Reduce the monster's health by the attack damage
